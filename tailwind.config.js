@@ -2,7 +2,16 @@
 module.exports = {
     content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
     theme: {
-        extend: {},
+        extend: {
+            gridTemplateRows: {
+                10: "repeat(10, minmax(0, 1fr))",
+            },
+            gridRow: {
+                "span-7": "span 7 / span 7",
+                "span-8": "span 8 / span 8",
+                "span-9": "span 9 / span 9",
+            },
+        },
     },
     plugins: [],
 };
