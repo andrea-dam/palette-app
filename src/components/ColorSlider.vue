@@ -1,6 +1,6 @@
 <template>
-    <div class="flex w-full items-center justify-between space-x-2">
-        <label :for="props.sliderNumber">{{ props.attributo }}</label>
+    <div class="grid w-full grid-cols-12 items-center justify-between gap-1.5">
+        <label :for="props.sliderNumber" class="col-span-1">{{ props.attributo }}</label>
         <input
             type="range"
             min="0"
@@ -8,8 +8,8 @@
             step="1"
             v-model="state"
             :id="props.sliderNumber"
-            class="transparent h-1.5 w-full cursor-grab appearance-none rounded-lg border-transparent bg-neutral-200 active:cursor-grabbing" />
-        <input type="text" v-model="state" size="1" class="w-7" />
+            class="transparent col-span-9 h-1.5 w-full cursor-grab appearance-none rounded-lg border-transparent bg-neutral-200 active:cursor-grabbing" />
+        <input type="text" v-model="state" class="col-span-2" />
     </div>
 </template>
 
