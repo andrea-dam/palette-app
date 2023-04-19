@@ -5,7 +5,7 @@
             <h2 class="text-xs italic">by Andrea Damiani</h2>
         </header>
         <main class="row-span-8 grid grid-cols-12">
-            <div class="container col-span-10 flex items-center justify-center space-x-8 p-10 pb-5">
+            <div class="container col-span-10 flex items-center justify-center space-x-14 pb-5 pt-10">
                 <ColorCard v-for="card in openCards" :key="card" :id="card" :card-number="card" />
             </div>
             <aside class="col-span-2 border-l-2 p-8">Barra Laterale</aside>
