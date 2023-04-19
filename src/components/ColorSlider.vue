@@ -8,6 +8,7 @@
             step="1"
             v-model="state"
             :id="props.sliderNumber"
+            @change="$emit('parameter', state)"
             class="transparent col-span-9 h-1.5 w-full cursor-grab appearance-none rounded-lg border-transparent bg-neutral-200 active:cursor-grabbing" />
         <input type="text" v-model="state" class="col-span-2" />
     </div>
@@ -18,6 +19,7 @@ import { ref } from "vue";
 import { useStorage } from "@vueuse/core";
 
 const props = defineProps(["cardNumber", "sliderNumber", "attributo"]);
+defineEmits(["parameter"]);
 
 const defaultState = ref(128);
 

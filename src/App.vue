@@ -1,7 +1,7 @@
 <template>
     <div class="grid h-screen grid-cols-12">
         <div class="col-span-10 grid grid-rows-10">
-            <header class="row-span-1 flex items-center justify-between border-b-2 px-24">
+            <header class="row-span-1 flex items-center justify-between border-b-2 px-12">
                 <h1 class="text-2xl">Palette App</h1>
                 <h2 class="text-xs italic">by Andrea Damiani</h2>
             </header>
@@ -9,8 +9,8 @@
                 <ColorCard v-for="card in openCards" :key="card" :id="card" :card-number="card" />
             </main>
             <footer class="row-span-1 flex items-center justify-center space-x-4 border-t-2">
-                <SignButton @click="changeCards('-')" icon="twemoji:heavy-minus-sign" />
-                <SignButton @click="changeCards('+')" icon="twemoji:heavy-plus-sign" />
+                <SignButton v-show="cards > 1" @click="changeCards('-')" icon="twemoji:heavy-minus-sign" />
+                <SignButton v-show="cards < 5" @click="changeCards('+')" icon="twemoji:heavy-plus-sign" />
             </footer>
         </div>
         <aside class="col-span-2 flex flex-col items-center space-y-2 border-l-2 p-5">
