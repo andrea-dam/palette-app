@@ -6,7 +6,7 @@
         </header>
         <main class="row-span-8 grid grid-cols-12">
             <div class="container col-span-10 flex items-center justify-center space-x-8 p-10 pb-5">
-                <ColorCard v-for="number in numberOfCards" :key="number" :id="number" :card-number="number" />
+                <ColorCard v-for="card in openCards" :key="card" :id="card" :card-number="card" />
             </div>
             <aside class="col-span-2 border-l-2 p-8">Barra Laterale</aside>
         </main>
@@ -19,21 +19,24 @@
 
 <script setup>
 import { ref } from "vue";
+import { useStorage } from "@vueuse/core";
 import ColorCard from "./components/ColorCard.vue";
 import SignButton from "./components/SignButton.vue";
 
-const numberOfCards = ref(1);
+const cards = ref(1);
+
+const openCards = useStorage("carte-aperte", cards);
 
 const changeCards = sign => {
     if (sign === "+") {
-        if (numberOfCards.value === 5) {
+        if (cards.value === 5) {
         } else {
-            numberOfCards.value++;
+            cards.value++;
         }
     } else {
-        if (numberOfCards.value === 1) {
+        if (cards.value === 1) {
         } else {
-            numberOfCards.value--;
+            cards.value--;
         }
     }
 };

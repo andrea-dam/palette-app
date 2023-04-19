@@ -1,5 +1,5 @@
 <template>
-    <div class="flex w-full items-center justify-between space-x-5">
+    <div class="flex w-full items-center justify-between space-x-2">
         <input
             type="range"
             min="0"
@@ -7,7 +7,7 @@
             step="1"
             v-model="state"
             class="transparent h-1.5 w-full cursor-grab appearance-none rounded-lg border-transparent bg-neutral-200 active:cursor-grabbing" />
-        <input type="text" v-model="state" size="1" />
+        <input type="text" v-model="state" size="1" class="w-7" />
     </div>
 </template>
 
