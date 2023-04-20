@@ -10,20 +10,31 @@
             @input="$emit('updateValue', state)"
             :id="props.sliderNumber"
             class="transparent col-span-9 h-1.5 w-full cursor-grab appearance-none rounded-lg border-transparent bg-neutral-200 active:cursor-grabbing" />
-        <input type="text" v-model="state" class="col-span-2" />
+        <input ref="textInput" type="text" v-model.number="state" class="col-span-2" min="0" @keypress.enter="removeFocus" minlength="1" />
     </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useStorage } from "@vueuse/core";
 
 const props = defineProps(["cardNumber", "sliderNumber", "attributo", "max"]);
 defineEmits(["updateValue"]);
 
 const defaultState = ref(50);
+const textInput = ref(null)
 
 const uniqueValue = `card${props.cardNumber}` + `slider${props.sliderNumber}`;
 
 const state = useStorage(uniqueValue, defaultState);
+
+watch(state, newValue => {
+    if (isNaN(newValue)) {
+        state.value = 0;
+    }
+});
+
+const removeFocus = () => {
+    textInput.value.blur();
+}
 </script>
