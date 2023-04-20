@@ -11,16 +11,18 @@
             <main class="row-span-8 flex items-center justify-center bg-slate-50 pb-5 pt-6 dark:bg-slate-900 lg:space-x-10">
                 <ColorCard v-for="card in openCards" :key="card" :card-number="card" />
             </main>
-            <footer class="to row-span-1 flex items-center justify-center space-x-4 bg-blue-500 dark:bg-slate-800">
-                <div>
+            <footer class="row-span-1 grid grid-cols-2 items-center justify-center space-x-4 bg-blue-500 dark:bg-slate-800">
+                <div class="flex items-center justify-end space-x-2">
+                    <h4 v-show="cards > 1">Remove Card</h4>
                     <SignButton v-show="cards > 1" @click="changeCards('-')" icon="ic:round-minus" />
                 </div>
-                <div>
+                <div class="flex items-center space-x-2">
                     <SignButton v-show="cards < 5" @click="changeCards('+')" icon="ic:round-plus" />
+                    <h4 v-show="cards < 5">Add Card</h4>
                 </div>
             </footer>
         </div>
-        <aside class="col-span-2 flex flex-col items-center space-y-2 bg-blue-600 p-5 dark:bg-slate-700">
+        <aside class="z-10 col-span-2 flex flex-col items-center space-y-2 bg-blue-600 p-5 dark:bg-slate-700">
             <div
                 v-for="palette in openPalettes"
                 :key="palette"
