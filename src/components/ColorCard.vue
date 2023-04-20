@@ -1,6 +1,6 @@
 <template>
     <div class="group relative flex h-full w-48 flex-col space-y-1">
-        <div :id="`card${cardNumber}`" class="h-full rounded drop-shadow-xl"></div>
+        <div :id="`card${cardNumber}`" class="h-full rounded drop-shadow-xl dark:drop-shadow-none"></div>
         <div>
             <ColorSlider :card-number="cardNumber" sliderNumber="1" attributo="H" @update-value="value => (hue = value)" max="360" />
             <ColorSlider :card-number="cardNumber" sliderNumber="2" attributo="S" @update-value="value => (saturation = value)" max="100" />
