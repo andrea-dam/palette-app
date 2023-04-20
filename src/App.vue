@@ -1,5 +1,13 @@
 <template>
-    <div class="grid h-screen grid-cols-12">
+    <div
+        v-if="width <= 768 || orientation === 'portrait-primary'"
+        class="flex h-screen w-screen flex-col items-center justify-center space-y-5 bg-slate-900 p-10">
+        <h1 class="text-5xl">Palette App</h1>
+        <h2 class="text-2xl italic">by Andrea Damiani</h2>
+        <Icon icon="material-symbols:mobile-off-rounded" class="text-9xl" />
+        <h2 class="text-center text-3xl">Quest'app non è utilizzabile su dispositivi mobili.</h2>
+    </div>
+    <div v-else class="grid h-screen grid-cols-12">
         <div class="col-span-10 grid grid-rows-10">
             <header class="row-span-1 flex items-center justify-between bg-blue-500 px-6 dark:bg-slate-800">
                 <div class="flex w-32 flex-col drop-shadow">
@@ -8,10 +16,12 @@
                 </div>
                 <DarkButton @click="toggleDark()" />
             </header>
-            <main class="row-span-8 flex items-center justify-center bg-slate-50 pb-5 pt-6 dark:bg-slate-900 lg:space-x-10">
+            <main
+                class="row-span-8 flex items-center justify-center bg-slate-50 pb-5 pt-6 dark:bg-slate-900 xl:space-x-4 2xl:space-x-10">
                 <ColorCard v-for="card in openCards" :key="card" :card-number="card" />
             </main>
-            <footer class="row-span-1 grid grid-cols-2 items-center justify-center space-x-4 bg-blue-500 dark:bg-slate-800">
+            <footer
+                class="row-span-1 grid grid-cols-2 items-center justify-center space-x-4 bg-blue-500 dark:bg-slate-800">
                 <div class="flex items-center justify-end space-x-2">
                     <h4 v-show="cards > 1">Remove Card</h4>
                     <SignButton v-show="cards > 1" @click="changeCards('-')" icon="ic:round-minus" />
@@ -47,7 +57,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { useStorage, useDark, useToggle } from "@vueuse/core";
+import { useStorage, useDark, useToggle, useWindowSize, useScreenOrientation } from "@vueuse/core";
 import ColorCard from "./components/ColorCard.vue";
 import SignButton from "./components/SignButton.vue";
 import DarkButton from "./components/DarkButton.vue";
@@ -81,4 +91,8 @@ const addPalette = () => {
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
+
+const { width } = useWindowSize();
+
+const { orientation } = useScreenOrientation();
 </script>
