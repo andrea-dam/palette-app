@@ -2,13 +2,28 @@
     <div class="group relative flex h-full w-48 flex-col space-y-1">
         <div :id="`card${cardNumber}`" class="h-full rounded drop-shadow-xl dark:drop-shadow-none"></div>
         <div>
-            <ColorSlider :card-number="cardNumber" sliderNumber="1" attributo="H" @update-value="value => (hue = value)" max="360" />
-            <ColorSlider :card-number="cardNumber" sliderNumber="2" attributo="S" @update-value="value => (saturation = value)" max="100" />
-            <ColorSlider :card-number="cardNumber" sliderNumber="3" attributo="L" @update-value="value => (lightness = value)" max="100" />
+            <ColorSlider
+                :card-number="cardNumber"
+                sliderNumber="1"
+                attributo="H"
+                @update-value="value => (hue = value)"
+                max="360" />
+            <ColorSlider
+                :card-number="cardNumber"
+                sliderNumber="2"
+                attributo="S"
+                @update-value="value => (saturation = value)"
+                max="100" />
+            <ColorSlider
+                :card-number="cardNumber"
+                sliderNumber="3"
+                attributo="L"
+                @update-value="value => (lightness = value)"
+                max="100" />
         </div>
         <button
             @click="copy(result)"
-            class="absolute right-2 top-2 hidden h-10 w-10 items-center justify-center rounded bg-gray-50 text-3xl dark:text-slate-200 dark:bg-slate-500 text-blue-600 group-hover:flex">
+            class="absolute right-2 top-2 hidden h-10 w-10 items-center justify-center rounded bg-gray-50 text-3xl text-blue-600 group-hover:flex dark:bg-slate-500 dark:text-slate-200">
             <Icon v-if="!copied" icon="mdi:clipboard-multiple-outline" />
             <Icon v-else icon="mdi:clipboard-check-multiple-outline" />
         </button>
@@ -22,16 +37,19 @@ import ColorSlider from "../components/ColorSlider.vue";
 
 const props = defineProps(["cardNumber"]);
 
-const hue = useStorage(`card${props.cardNumber}` + "slider1", 180);
+const hue = useStorage(`card${props.cardNumber}` + "slider1", 0);
 
 const saturation = useStorage(`card${props.cardNumber}` + "slider2", 50);
 let saturationPercentage = `${saturation.value}%`;
 const lightness = useStorage(`card${props.cardNumber}` + "slider3", 50);
 let lightnessPercentage = `${lightness.value}%`;
 
-const css = useStyleTag(`#card${props.cardNumber} { background-color: hsl(${hue.value}, ${saturation.value}%, ${lightness.value}%) }`, {
-    id: `id${props.cardNumber}`,
-});
+const css = useStyleTag(
+    `#card${props.cardNumber} { background-color: hsl(${hue.value}, ${saturation.value}%, ${lightness.value}%) }`,
+    {
+        id: `id${props.cardNumber}`,
+    }
+);
 
 watch(hue, newValue => {
     if (newValue) {
@@ -68,7 +86,5 @@ watch(lightness, newValue => {
 
 const result = ref(`hsl(${hue.value}, ${saturationPercentage}, ${lightnessPercentage})`);
 
-console.log(result.value);
-
-const { text, copy, copied, isSupported } = useClipboard({ result });
+const { copy, copied } = useClipboard({ result });
 </script>
