@@ -21,9 +21,9 @@ import { useStorage } from "@vueuse/core";
 const props = defineProps(["cardNumber", "sliderNumber", "attributo", "max"]);
 defineEmits(["updateValue"]);
 
-const defaultState = ref(128);
+const defaultState = ref(50);
 
-const uniqueValue = props.cardNumber + props.sliderNumber;
+const uniqueValue = `card${props.cardNumber}` + `slider${props.sliderNumber}`;
 
 const state = useStorage(uniqueValue, defaultState);
 </script>
