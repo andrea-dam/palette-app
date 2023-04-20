@@ -6,7 +6,7 @@
                 <h2 class="text-xs italic">by Andrea Damiani</h2>
             </header>
             <main class="row-span-8 flex items-center justify-center pb-5 pt-6 lg:space-x-2">
-                <ColorCard v-for="card in openCards" :key="card" :id="card" :card-number="card" />
+                <ColorCard v-for="card in openCards" :key="card" :card-number="card" />
             </main>
             <footer class="row-span-1 flex items-center justify-center space-x-4 border-t-2">
                 <SignButton v-show="cards > 1" @click="changeCards('-')" icon="twemoji:heavy-minus-sign" />
