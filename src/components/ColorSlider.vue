@@ -5,6 +5,7 @@
             type="range"
             min="0"
             step="1"
+            :max="props.max"
             v-model="state"
             @input="$emit('updateValue', state)"
             :id="props.sliderNumber"
@@ -17,7 +18,7 @@
 import { ref } from "vue";
 import { useStorage } from "@vueuse/core";
 
-const props = defineProps(["cardNumber", "sliderNumber", "attributo"]);
+const props = defineProps(["cardNumber", "sliderNumber", "attributo", "max"]);
 defineEmits(["updateValue"]);
 
 const defaultState = ref(128);
