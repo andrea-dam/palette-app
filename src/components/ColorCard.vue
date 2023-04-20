@@ -8,9 +8,9 @@
         </div>
         <button
             @click="copy(result)"
-            class="absolute right-5 top-5 hidden h-10 w-10 items-center justify-center rounded bg-gray-400/70 text-white hover:bg-blue-200 hover:text-gray-900 group-hover:flex">
-            <Icon v-if="!copied" icon="mdi:clipboard-multiple-outline" class="text-3xl" />
-            <Icon v-else icon="mdi:clipboard-check-multiple-outline" class="text-3xl" />
+            class="absolute right-2 top-2 hidden h-10 w-10 items-center justify-center rounded bg-gray-50 text-3xl dark:text-slate-200 dark:bg-slate-500 text-blue-600 group-hover:flex">
+            <Icon v-if="!copied" icon="mdi:clipboard-multiple-outline" />
+            <Icon v-else icon="mdi:clipboard-check-multiple-outline" />
         </button>
     </div>
 </template>
