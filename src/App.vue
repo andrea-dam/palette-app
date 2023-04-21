@@ -10,7 +10,7 @@
     <div v-else class="grid h-screen grid-cols-12">
         <div class="col-span-10 grid grid-rows-10">
             <header class="row-span-1 flex items-center justify-between bg-[#1695A3] px-6 dark:bg-slate-800">
-                <div class="flex w-32 flex-col drop-shadow">
+                <div class="flex w-36 flex-col drop-shadow">
                     <h1 class="text-2xl">Palette App</h1>
                     <h2 class="text-end text-xs italic">by Andrea Damiani</h2>
                 </div>
