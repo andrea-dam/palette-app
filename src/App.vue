@@ -24,8 +24,8 @@
                 :key="palette"
                 role="button"
                 @click="showPalette(palette)"
-                :class="{ 'bg-[#EB7F00] dark:bg-slate-300': palette === paletteSelezionata }"
-                class="relative flex h-12 w-full items-center rounded-lg bg-[#F3FFE2] px-6 text-lg font-medium text-[#225378] shadow-md dark:bg-slate-400 dark:text-slate-700 hover:bg-[#EB7F00] dark:hover:bg-slate-200">
+                :class="{ active: palette === paletteSelezionata }"
+                class="relative flex h-12 w-full items-center rounded-lg bg-[#F3FFE2] px-6 text-lg font-medium text-[#225378] shadow-md hover:bg-[#EB7F00] dark:bg-slate-400 dark:text-slate-700 dark:hover:bg-slate-200">
                 <p>Palette {{ palette }}</p>
                 <Icon
                     v-if="palette === openPalettes && openPalettes > 1"
@@ -83,3 +83,9 @@ watch(selectedPalette, value => {
     }
 });
 </script>
+
+<style scoped>
+.active {
+    @apply bg-[#EB7F00] dark:bg-slate-300;
+}
+</style>
