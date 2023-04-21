@@ -16,7 +16,7 @@
                 </div>
                 <DarkButton @click="toggleDark()" />
             </header>
-            <ThePalette v-if="selectedPalette" />
+            <ThePalette :selected-palette="selectedPalette" />
         </div>
         <aside class="z-10 col-span-2 flex flex-col items-center space-y-2 bg-blue-600 p-5 dark:bg-slate-700">
             <div
@@ -24,7 +24,7 @@
                 :key="palette"
                 role="button"
                 @click="showPalette(palette)"
-                class="relative flex h-12 w-full items-center rounded-lg bg-white px-6 text-lg font-medium text-blue-700 shadow-md dark:text-slate-100">
+                class="relative flex h-12 w-full items-center rounded-lg bg-white dark:bg-slate-400 px-6 text-lg font-medium text-blue-700 shadow-md dark:text-slate-700">
                 <p>Palette {{ palette }}</p>
                 <Icon
                     v-if="palette === openPalettes && openPalettes > 1"

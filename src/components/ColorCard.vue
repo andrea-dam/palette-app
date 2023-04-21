@@ -35,7 +35,7 @@ import { ref, watch } from "vue";
 import { useStyleTag, useStorage, useClipboard } from "@vueuse/core";
 import ColorSlider from "../components/ColorSlider.vue";
 
-const props = defineProps(["cardNumber"]);
+const props = defineProps(["cardNumber", "selectedPalette"]);
 
 const hue = useStorage(`card${props.cardNumber}` + "slider1", 0);
 
