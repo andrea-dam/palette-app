@@ -3,18 +3,21 @@
         <div :id="`card${cardNumber}`" class="h-full rounded drop-shadow-xl dark:drop-shadow-none"></div>
         <div>
             <ColorSlider
+                :palette-number="props.selectedPalette"
                 :card-number="cardNumber"
                 sliderNumber="1"
                 attributo="H"
                 @update-value="value => (hue = value)"
                 max="360" />
             <ColorSlider
+                :palette-number="props.selectedPalette"
                 :card-number="cardNumber"
                 sliderNumber="2"
                 attributo="S"
                 @update-value="value => (saturation = value)"
                 max="100" />
             <ColorSlider
+                :palette-number="props.selectedPalette"
                 :card-number="cardNumber"
                 sliderNumber="3"
                 attributo="L"
@@ -44,12 +47,9 @@ let saturationPercentage = `${saturation.value}%`;
 const lightness = useStorage(`palette${props.selectedPalette}-card${props.cardNumber}-slider3`, 50);
 let lightnessPercentage = `${lightness.value}%`;
 
-const css = useStyleTag(
-    `#card${props.cardNumber} { background-color: hsl(${hue.value}, ${saturation.value}%, ${lightness.value}%) }`,
-    {
-        id: `id${props.cardNumber}`,
-    }
-);
+const css = useStyleTag(`#card${props.cardNumber} { background-color: hsl(${hue.value}, ${saturation.value}%, ${lightness.value}%) }`, {
+    id: `id${props.cardNumber}`,
+});
 
 watch(hue, newValue => {
     if (newValue) {

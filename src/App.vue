@@ -24,7 +24,7 @@
                 :key="palette"
                 role="button"
                 @click="showPalette(palette)"
-                class="relative flex h-12 w-full items-center rounded-lg bg-white dark:bg-slate-400 px-6 text-lg font-medium text-blue-700 shadow-md dark:text-slate-700">
+                class="relative flex h-12 w-full items-center rounded-lg bg-white px-6 text-lg font-medium text-blue-700 shadow-md dark:bg-slate-400 dark:text-slate-700">
                 <p>Palette {{ palette }}</p>
                 <Icon
                     v-if="palette === openPalettes && openPalettes > 1"
@@ -80,5 +80,5 @@ watch(selectedPalette, value => {
     if (value) {
         paletteSelezionata.value = value;
     }
-})
+});
 </script>

@@ -65,14 +65,6 @@ const changeCards = sign => {
         }
     }
 };
-
-const selezionata = ref(props.selectedPalette);
-
-watch(selezionata, value => {
-    if (value) {
-        console.log(props.selectedPalette);
-    }
-});
 </script>
 
 <style scoped>

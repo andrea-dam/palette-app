@@ -24,13 +24,13 @@
 import { ref, watch } from "vue";
 import { useStorage } from "@vueuse/core";
 
-const props = defineProps(["cardNumber", "sliderNumber", "attributo", "max"]);
+const props = defineProps(["paletteNumber", "cardNumber", "sliderNumber", "attributo", "max"]);
 defineEmits(["updateValue"]);
 
 const defaultState = ref(50);
 const textInput = ref(null);
 
-const uniqueValue = `card${props.cardNumber}` + `slider${props.sliderNumber}`;
+const uniqueValue = `palette${props.paletteNumber}-card${props.cardNumber}-slider${props.sliderNumber}`;
 
 const state = useStorage(uniqueValue, defaultState);
 
