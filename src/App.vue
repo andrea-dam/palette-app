@@ -16,7 +16,7 @@
                 </div>
                 <DarkButton @click="toggleDark()" />
             </header>
-            <ThePalette :selected-palette="selectedPalette" />
+            <ThePalette :selected-palette="paletteSelezionata" />
         </div>
         <aside class="z-10 col-span-2 flex flex-col items-center space-y-2 bg-blue-600 p-5 dark:bg-slate-700">
             <div
@@ -44,7 +44,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useStorage, useDark, useToggle, useWindowSize, useScreenOrientation } from "@vueuse/core";
 
 import ThePalette from "./components/ThePalette.vue";
@@ -73,4 +73,12 @@ const selectedPalette = ref(1);
 const showPalette = palette => {
     selectedPalette.value = palette;
 };
+
+const paletteSelezionata = ref(1);
+
+watch(selectedPalette, value => {
+    if (value) {
+        paletteSelezionata.value = value;
+    }
+})
 </script>

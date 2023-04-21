@@ -37,11 +37,11 @@ import ColorSlider from "../components/ColorSlider.vue";
 
 const props = defineProps(["cardNumber", "selectedPalette"]);
 
-const hue = useStorage(`card${props.cardNumber}` + "slider1", 0);
+const hue = useStorage(`palette${props.selectedPalette}-card${props.cardNumber}-slider1`, 0);
 
-const saturation = useStorage(`card${props.cardNumber}` + "slider2", 50);
+const saturation = useStorage(`palette${props.selectedPalette}-card${props.cardNumber}-slider2`, 50);
 let saturationPercentage = `${saturation.value}%`;
-const lightness = useStorage(`card${props.cardNumber}` + "slider3", 50);
+const lightness = useStorage(`palette${props.selectedPalette}-card${props.cardNumber}-slider3`, 50);
 let lightnessPercentage = `${lightness.value}%`;
 
 const css = useStyleTag(

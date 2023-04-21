@@ -42,12 +42,12 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useStorage } from "@vueuse/core";
 import ColorCard from "./ColorCard.vue";
 import SignButton from "./SignButton.vue";
 
-defineProps(["selectedPalette"]);
+const props = defineProps(["selectedPalette"]);
 
 const cards = ref(1);
 const openCards = useStorage("carte-aperte", cards);
@@ -65,6 +65,14 @@ const changeCards = sign => {
         }
     }
 };
+
+const selezionata = ref(props.selectedPalette);
+
+watch(selezionata, value => {
+    if (value) {
+        console.log(props.selectedPalette);
+    }
+});
 </script>
 
 <style scoped>
