@@ -5,12 +5,10 @@
     </main>
     <footer class="row-span-1 grid grid-cols-2 items-center justify-center space-x-4 bg-blue-500 dark:bg-slate-800">
         <div class="flex items-center justify-end space-x-2">
-            <h4 v-show="cards > 1">Remove Card</h4>
             <SignButton v-show="cards > 1" @click="changeCards('-')" icon="ic:round-minus" />
         </div>
         <div class="flex items-center space-x-2">
             <SignButton v-show="cards < 5" @click="changeCards('+')" icon="ic:round-plus" />
-            <h4 v-show="cards < 5">Add Card</h4>
         </div>
     </footer>
 </template>

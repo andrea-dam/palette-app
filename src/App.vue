@@ -1,11 +1,11 @@
 <template>
     <div
-        v-if="width <= 768 || orientation === 'portrait-primary'"
+        v-if="width <= 1024 || orientation === 'portrait-primary'"
         class="flex h-screen w-screen flex-col items-center justify-center space-y-5 bg-slate-900 p-10">
         <h1 class="text-5xl">Palette App</h1>
         <h2 class="text-2xl italic">by Andrea Damiani</h2>
         <Icon icon="material-symbols:mobile-off-rounded" class="text-9xl" />
-        <h2 class="text-center text-3xl">Quest'app non è utilizzabile su dispositivi mobili.</h2>
+        <h2 class="text-center text-3xl">Quest'app è utilizzabile solo su uno schermo grande.</h2>
     </div>
     <div v-else class="grid h-screen grid-cols-12">
         <div class="col-span-10 grid grid-rows-10">
