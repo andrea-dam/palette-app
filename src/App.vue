@@ -9,7 +9,7 @@
     </div>
     <div v-else class="grid h-screen grid-cols-12">
         <div class="col-span-10 grid grid-rows-10">
-            <header class="row-span-1 flex items-center justify-between bg-blue-500 px-6 dark:bg-slate-800">
+            <header class="row-span-1 flex items-center justify-between bg-[#1695A3] px-6 dark:bg-slate-800">
                 <div class="flex w-32 flex-col drop-shadow">
                     <h1 class="text-2xl">Palette App</h1>
                     <h2 class="text-end text-xs italic">by Andrea Damiani</h2>
@@ -18,13 +18,14 @@
             </header>
             <ThePalette :selected-palette="paletteSelezionata" />
         </div>
-        <aside class="z-10 col-span-2 flex flex-col items-center space-y-2 bg-blue-600 p-5 dark:bg-slate-700">
+        <aside class="z-10 col-span-2 flex flex-col items-center space-y-2 bg-[#225378] p-5 dark:bg-slate-700">
             <div
                 v-for="palette in openPalettes"
                 :key="palette"
                 role="button"
                 @click="showPalette(palette)"
-                class="relative flex h-12 w-full items-center rounded-lg bg-white px-6 text-lg font-medium text-blue-700 shadow-md dark:bg-slate-400 dark:text-slate-700">
+                :class="{ 'bg-[#EB7F00] dark:bg-slate-300': palette === paletteSelezionata }"
+                class="relative flex h-12 w-full items-center rounded-lg bg-[#F3FFE2] px-6 text-lg font-medium text-[#225378] shadow-md dark:bg-slate-400 dark:text-slate-700 hover:bg-[#EB7F00] dark:hover:bg-slate-200">
                 <p>Palette {{ palette }}</p>
                 <Icon
                     v-if="palette === openPalettes && openPalettes > 1"
@@ -36,7 +37,7 @@
             <button
                 v-show="paletteNumber < 10"
                 @click="addPalette"
-                class="flex h-12 w-full items-center justify-center rounded-lg bg-white shadow-md dark:bg-slate-500">
+                class="flex h-12 w-full items-center justify-center rounded-lg bg-[#F3FFE2] shadow-md dark:bg-slate-500">
                 <Icon icon="ic:round-plus" class="text-5xl text-blue-700 dark:text-slate-300" />
             </button>
         </aside>

@@ -1,5 +1,5 @@
 <template>
-    <main class="row-span-8 bg-slate-50 pb-5 pt-6 dark:bg-slate-900">
+    <main class="row-span-8 bg-[#F3FFE2] pb-5 pt-6 dark:bg-slate-900">
         <div v-if="selectedPalette === 1" class="card-container">
             <ColorCard v-for="card in openCards" :key="card" :card-number="card" :selected-palette="selectedPalette" />
         </div>
@@ -31,7 +31,7 @@
             <ColorCard v-for="card in openCards" :key="card" :card-number="card" :selected-palette="selectedPalette" />
         </div>
     </main>
-    <footer class="row-span-1 grid grid-cols-2 items-center justify-center space-x-4 bg-blue-500 dark:bg-slate-800">
+    <footer class="row-span-1 grid grid-cols-2 items-center justify-center space-x-4 bg-[#1695A3] dark:bg-slate-800">
         <div class="flex items-center justify-end space-x-2">
             <SignButton v-show="cards > 1" @click="changeCards('-')" icon="ic:round-minus" />
         </div>

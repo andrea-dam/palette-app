@@ -26,7 +26,7 @@
         </div>
         <button
             @click="copy(result)"
-            class="absolute right-2 top-2 hidden h-10 w-10 items-center justify-center rounded bg-gray-50 text-3xl text-blue-600 group-hover:flex dark:bg-slate-500 dark:text-slate-200">
+            class="absolute right-2 top-2 hidden h-10 w-10 items-center justify-center rounded bg-[#F3FFE2] text-3xl text-[#225378] group-hover:flex dark:bg-slate-500 dark:text-slate-200 shadow">
             <Icon v-if="!copied" icon="mdi:clipboard-multiple-outline" />
             <Icon v-else icon="mdi:clipboard-check-multiple-outline" />
         </button>

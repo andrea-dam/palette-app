@@ -14,7 +14,7 @@
             ref="textInput"
             type="text"
             v-model.number="state"
-            class="col-span-2 bg-slate-50 text-black outline-none dark:bg-slate-900 dark:text-white"
+            class="col-span-2 bg-[#F3FFE2] text-black outline-none dark:bg-slate-900 dark:text-white"
             @keypress.enter="removeFocus"
             minlength="1" />
     </div>
@@ -44,3 +44,16 @@ const removeFocus = () => {
     textInput.value.blur();
 };
 </script>
+
+<style scoped>
+input[type="range"]::-webkit-slider-thumb {
+    /* box-shadow: 0px 0px 0px #000000; */
+    border: 1px solid #2497e3;
+    height: 15px;
+    width: 15px;
+    border-radius: 25px;
+    background: #1695A3;
+    -webkit-appearance: none;
+    /* margin-top: -4px; */
+}
+</style>
