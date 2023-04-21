@@ -38,7 +38,7 @@
                 v-show="paletteNumber < 10"
                 @click="addPalette"
                 class="flex h-12 w-full items-center justify-center rounded-lg bg-[#F3FFE2] shadow-md dark:bg-slate-500">
-                <Icon icon="ic:round-plus" class="text-5xl text-blue-700 dark:text-slate-300" />
+                <Icon icon="ic:round-plus" class="text-5xl text-[#225378] dark:text-slate-300" />
             </button>
         </aside>
     </div>
