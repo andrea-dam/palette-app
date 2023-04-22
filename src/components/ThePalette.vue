@@ -42,7 +42,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import { useStorage } from "@vueuse/core";
 import ColorCard from "./ColorCard.vue";
 import SignButton from "./SignButton.vue";
@@ -50,7 +50,7 @@ import SignButton from "./SignButton.vue";
 const props = defineProps(["selectedPalette"]);
 
 const cards = ref(1);
-const openCards = useStorage("carte-aperte", cards);
+const openCards = useStorage(`carteaperte`, cards);
 
 const changeCards = sign => {
     if (sign === "+") {
