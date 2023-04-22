@@ -1,20 +1,20 @@
 <template>
-    <div class="grid w-full grid-cols-12 items-center justify-between gap-1.5">
+    <div class="grid w-full grid-cols-12 items-center justify-between gap-2">
         <label :for="props.sliderNumber" class="col-span-1 text-black dark:text-white">{{ props.attributo }}</label>
         <input
             type="range"
             min="0"
-            step="1"
+            step="0.5"
             :max="props.max"
             v-model="state"
             @input="$emit('updateValue', state)"
             :id="props.sliderNumber"
-            class="transparent col-span-9 h-1.5 w-full cursor-grab appearance-none rounded-lg border-transparent bg-neutral-200 text-red-600 active:cursor-grabbing dark:bg-slate-600" />
+            class="transparent col-span-8 h-1.5 w-full cursor-grab appearance-none rounded-lg border-transparent bg-neutral-200 text-red-600 active:cursor-grabbing dark:bg-slate-600" />
         <input
             ref="textInput"
             type="text"
             v-model.number="state"
-            class="col-span-2 bg-[#F3FFE2] text-black outline-none dark:bg-slate-900 dark:text-white"
+            class="col-span-3 bg-[#F3FFE2] text-black outline-none dark:bg-slate-900 dark:text-white"
             @keypress.enter="removeFocus"
             minlength="1" />
     </div>
@@ -52,7 +52,7 @@ input[type="range"]::-webkit-slider-thumb {
     height: 15px;
     width: 15px;
     border-radius: 25px;
-    background: #1695A3;
+    background: #1695a3;
     -webkit-appearance: none;
     /* margin-top: -4px; */
 }
