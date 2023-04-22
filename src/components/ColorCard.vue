@@ -26,7 +26,7 @@
         </div>
         <button
             @click="copy(result)"
-            class="absolute right-2 top-2 hidden h-10 w-10 items-center justify-center rounded bg-[#F3FFE2] text-3xl text-[#225378] group-hover:flex dark:bg-slate-500 dark:text-slate-200 shadow">
+            class="absolute right-2 top-2 hidden h-10 w-10 items-center justify-center rounded bg-[#F3FFE2] text-3xl text-[#225378] shadow group-hover:flex dark:bg-slate-500 dark:text-slate-200">
             <Icon v-if="!copied" icon="mdi:clipboard-multiple-outline" />
             <Icon v-else icon="mdi:clipboard-check-multiple-outline" />
         </button>
@@ -40,16 +40,25 @@ import ColorSlider from "../components/ColorSlider.vue";
 
 const props = defineProps(["cardNumber", "selectedPalette"]);
 
-const hue = useStorage(`palette${props.selectedPalette}-card${props.cardNumber}-slider1`, 0);
+const hue = useStorage(
+    `palette${props.selectedPalette}-card${props.cardNumber}-slider1`,
+    Math.random() * (360 - 0) + 0
+);
 
-const saturation = useStorage(`palette${props.selectedPalette}-card${props.cardNumber}-slider2`, 50);
+const saturation = useStorage(
+    `palette${props.selectedPalette}-card${props.cardNumber}-slider2`,
+    Math.random() * (100 - 50) + 50
+);
 let saturationPercentage = `${saturation.value}%`;
 const lightness = useStorage(`palette${props.selectedPalette}-card${props.cardNumber}-slider3`, 50);
 let lightnessPercentage = `${lightness.value}%`;
 
-const css = useStyleTag(`#card${props.cardNumber} { background-color: hsl(${hue.value}, ${saturation.value}%, ${lightness.value}%) }`, {
-    id: `id${props.cardNumber}`,
-});
+const css = useStyleTag(
+    `#card${props.cardNumber} { background-color: hsl(${hue.value}, ${saturation.value}%, ${lightness.value}%) }`,
+    {
+        id: `id${props.cardNumber}`,
+    }
+);
 
 watch(hue, newValue => {
     if (newValue) {
