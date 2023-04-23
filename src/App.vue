@@ -13,6 +13,7 @@
     <div v-else class="grid h-screen grid-cols-12">
         <!-- Schermata Principale -->
         <div class="col-span-10 grid grid-rows-10">
+            <!-- Barra Titolo -->
             <header class="row-span-1 flex items-center justify-between bg-[#1695A3] px-6 dark:bg-slate-800">
                 <div class="flex w-36 flex-col drop-shadow">
                     <h1 class="text-2xl">Palette App</h1>
@@ -20,6 +21,8 @@
                 </div>
                 <DarkButton @click="toggleDark()" />
             </header>
+
+            <!-- Area Palette -->
             <ThePalette :selected-palette="paletteSelezionata" />
         </div>
 
