@@ -23,7 +23,16 @@
             </header>
 
             <!-- Area Palette -->
-            <ThePalette :selected-palette="selectedPalette" />
+            <ThePalette v-if="selectedPalette === 1" :selected-palette="1" />
+            <ThePalette v-else-if="selectedPalette === 2" :selected-palette="2" />
+            <ThePalette v-else-if="selectedPalette === 3" :selected-palette="3" />
+            <ThePalette v-else-if="selectedPalette === 4" :selected-palette="4" />
+            <ThePalette v-else-if="selectedPalette === 5" :selected-palette="5" />
+            <ThePalette v-else-if="selectedPalette === 6" :selected-palette="6" />
+            <ThePalette v-else-if="selectedPalette === 7" :selected-palette="7" />
+            <ThePalette v-else-if="selectedPalette === 8" :selected-palette="8" />
+            <ThePalette v-else-if="selectedPalette === 9" :selected-palette="9" />
+            <ThePalette v-else-if="selectedPalette === 10" :selected-palette="10" />
         </div>
 
         <!-- Barra Laterale -->
