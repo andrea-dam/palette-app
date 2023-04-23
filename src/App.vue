@@ -23,7 +23,7 @@
             </header>
 
             <!-- Area Palette -->
-            <ThePalette :selected-palette="paletteSelezionata" />
+            <ThePalette :selected-palette="selectedPalette" />
         </div>
 
         <!-- Barra Laterale -->
@@ -34,7 +34,7 @@
                 :key="palette"
                 role="button"
                 @click="showPalette(palette)"
-                :class="{ active: palette === paletteSelezionata }"
+                :class="{ active: palette === selectedPalette }"
                 class="relative flex h-12 w-full items-center rounded-lg bg-[#F3FFE2] px-6 text-lg font-medium text-[#225378] shadow-md hover:bg-[#EB7F00] dark:bg-slate-400 dark:text-slate-700 dark:hover:bg-slate-200">
                 <p>Palette {{ palette }}</p>
 
@@ -44,7 +44,7 @@
                     icon="ph:x-circle-bold"
                     class="absolute -right-3 -top-2 z-10 m-0 rounded-full border-0 bg-white p-0 text-2xl text-red-600 outline-none dark:bg-slate-200"
                     role="button"
-                    @click="paletteNumber--" />
+                    @click="removePalette" />
             </div>
 
             <!-- Pulsante Aggiungi Palette -->
@@ -59,42 +59,35 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import { useStorage, useDark, useToggle, useWindowSize, useScreenOrientation } from "@vueuse/core";
 
 import ThePalette from "./components/ThePalette.vue";
 import DarkButton from "./components/DarkButton.vue";
 
 const paletteNumber = ref(1);
+
 const openPalettes = useStorage("palettes-aperte", paletteNumber);
+const selectedPalette = useStorage("palette-selezionata", 1);
 
 const addPalette = () => {
-    if (paletteNumber.value === 10) {
-    } else {
-        paletteNumber.value++;
-    }
+    paletteNumber.value++;
+    selectedPalette.value = paletteNumber.value;
+};
+
+const removePalette = () => {
+    paletteNumber.value--;
+};
+
+const showPalette = palette => {
+    selectedPalette.value = palette;
 };
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
 
 const { width } = useWindowSize();
-
 const { orientation } = useScreenOrientation();
-
-const selectedPalette = ref(1);
-
-const showPalette = palette => {
-    selectedPalette.value = palette;
-};
-
-const paletteSelezionata = ref(1);
-
-watch(selectedPalette, value => {
-    if (value) {
-        paletteSelezionata.value = value;
-    }
-});
 </script>
 
 <style scoped>
