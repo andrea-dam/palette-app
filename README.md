@@ -1,29 +1,6 @@
-# tv-template
+# Palette App
 
-This template should help get you started developing with Vue 3 in Vite.
+App che consente all'utente di gestire fino a 10 palette di colori, ognuna delle quali può contenere fino a 5 card colore.
+Il colore di ogni singola card, regolabile in HSL tramite gli slider posizionati al di sotto della card stessa, è inoltre copiabile nella clipboard in modo tale da poter essere utilizzato comodamente nella propria applicazione o sito web.
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+## Il mio [portfolio] (https://andrea-dam.gitlab.io/)

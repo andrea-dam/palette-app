@@ -23,16 +23,16 @@
             </header>
 
             <!-- Area Palette -->
-            <ThePalette v-if="selectedPalette === 1" :selected-palette="1" />
-            <ThePalette v-else-if="selectedPalette === 2" :selected-palette="2" />
-            <ThePalette v-else-if="selectedPalette === 3" :selected-palette="3" />
-            <ThePalette v-else-if="selectedPalette === 4" :selected-palette="4" />
-            <ThePalette v-else-if="selectedPalette === 5" :selected-palette="5" />
-            <ThePalette v-else-if="selectedPalette === 6" :selected-palette="6" />
-            <ThePalette v-else-if="selectedPalette === 7" :selected-palette="7" />
-            <ThePalette v-else-if="selectedPalette === 8" :selected-palette="8" />
-            <ThePalette v-else-if="selectedPalette === 9" :selected-palette="9" />
-            <ThePalette v-else-if="selectedPalette === 10" :selected-palette="10" />
+            <ColorPalette v-if="selectedPalette === 1" :selected-palette="1" />
+            <ColorPalette v-else-if="selectedPalette === 2" :selected-palette="2" />
+            <ColorPalette v-else-if="selectedPalette === 3" :selected-palette="3" />
+            <ColorPalette v-else-if="selectedPalette === 4" :selected-palette="4" />
+            <ColorPalette v-else-if="selectedPalette === 5" :selected-palette="5" />
+            <ColorPalette v-else-if="selectedPalette === 6" :selected-palette="6" />
+            <ColorPalette v-else-if="selectedPalette === 7" :selected-palette="7" />
+            <ColorPalette v-else-if="selectedPalette === 8" :selected-palette="8" />
+            <ColorPalette v-else-if="selectedPalette === 9" :selected-palette="9" />
+            <ColorPalette v-else-if="selectedPalette === 10" :selected-palette="10" />
         </div>
 
         <!-- Barra Laterale -->
@@ -71,7 +71,7 @@
 import { ref } from "vue";
 import { useStorage, useDark, useToggle, useWindowSize, useScreenOrientation } from "@vueuse/core";
 
-import ThePalette from "./components/ThePalette.vue";
+import ColorPalette from "./components/ColorPalette.vue";
 import DarkButton from "./components/DarkButton.vue";
 
 const paletteNumber = ref(1);
