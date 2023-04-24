@@ -36,9 +36,12 @@
     <!-- Barra Inferiore -->
     <footer
         class="row-span-1 grid grid-cols-2 items-center justify-center space-x-4 bg-header-footer dark:bg-slate-800">
+        <!-- Pulsante Meno -->
         <div class="flex items-center justify-end space-x-2">
             <SignButton v-show="cards > 1" @click="changeCards('-')" icon="ic:round-minus" />
         </div>
+
+        <!-- Pulsante Più -->
         <div class="flex items-center space-x-2">
             <SignButton v-show="cards < 5" @click="changeCards('+')" icon="ic:round-plus" />
         </div>

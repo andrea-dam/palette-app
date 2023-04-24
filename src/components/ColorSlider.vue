@@ -1,7 +1,11 @@
 <template>
     <div class="grid w-full grid-cols-12 items-center justify-between gap-2">
         <!-- Label Slider -->
-        <label :for="props.sliderNumber" class="col-span-1 text-black dark:text-white">{{ props.attributo }}</label>
+        <label
+            :for="`${props.paletteNumber}${props.cardNumber}${props.sliderNumber}`"
+            class="col-span-1 text-black dark:text-white"
+            >{{ props.attributo }}</label
+        >
 
         <!-- Slider -->
         <input
@@ -11,12 +15,13 @@
             :max="props.max"
             v-model="state"
             @input="$emit('updateValue', state)"
-            :id="props.sliderNumber"
+            :id="`${props.paletteNumber}${props.cardNumber}${props.sliderNumber}`"
             class="transparent col-span-8 h-1.5 w-full cursor-grab appearance-none border-transparent bg-neutral-200 active:cursor-grabbing dark:bg-slate-600" />
 
         <!-- Text Input Slider -->
         <input
             ref="textInput"
+            :id="`${props.paletteNumber}${props.cardNumber}${props.sliderNumber}`"
             type="text"
             v-model.number="state"
             class="col-span-3 bg-main-area text-black outline-none dark:bg-slate-900 dark:text-white"
