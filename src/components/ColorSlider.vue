@@ -1,6 +1,9 @@
 <template>
     <div class="grid w-full grid-cols-12 items-center justify-between gap-2">
+        <!-- Label Slider -->
         <label :for="props.sliderNumber" class="col-span-1 text-black dark:text-white">{{ props.attributo }}</label>
+
+        <!-- Slider -->
         <input
             type="range"
             min="0"
@@ -9,7 +12,9 @@
             v-model="state"
             @input="$emit('updateValue', state)"
             :id="props.sliderNumber"
-            class="transparent col-span-8 h-1.5 w-full cursor-grab appearance-none rounded-lg border-transparent bg-neutral-200 text-red-600 active:cursor-grabbing dark:bg-slate-600" />
+            class="transparent col-span-8 h-1.5 w-full cursor-grab appearance-none border-transparent bg-neutral-200 active:cursor-grabbing dark:bg-slate-600" />
+
+        <!-- Text Input Slider -->
         <input
             ref="textInput"
             type="text"
@@ -27,7 +32,7 @@ import { useStorage } from "@vueuse/core";
 const props = defineProps(["paletteNumber", "cardNumber", "sliderNumber", "attributo", "max"]);
 defineEmits(["updateValue"]);
 
-const defaultState = ref(50);
+const defaultState = ref((Math.random() * (100 - 50) + 50).toFixed(1));
 const textInput = ref(null);
 
 const uniqueValue = `palette${props.paletteNumber}-card${props.cardNumber}-slider${props.sliderNumber}`;
@@ -47,13 +52,11 @@ const removeFocus = () => {
 
 <style scoped>
 input[type="range"]::-webkit-slider-thumb {
-    /* box-shadow: 0px 0px 0px #000000; */
     border: 1px solid #2497e3;
     height: 15px;
     width: 15px;
     border-radius: 25px;
     background: #1695a3;
     -webkit-appearance: none;
-    /* margin-top: -4px; */
 }
 </style>

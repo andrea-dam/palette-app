@@ -55,6 +55,7 @@ const saturation = useStorage(
     (Math.random() * (100 - 50) + 50).toFixed(1)
 );
 let saturationPercentage = `${saturation.value}%`;
+
 const lightness = useStorage(`palette${props.selectedPalette}-card${props.cardNumber}-slider3`, 50);
 let lightnessPercentage = `${lightness.value}%`;
 
