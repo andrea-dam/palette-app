@@ -4,9 +4,16 @@ module.exports = {
     darkMode: "class",
     theme: {
         fontFamily: {
-            sans: ['Inter', 'sans-serif'],
+            sans: ["Inter", "sans-serif"],
         },
         extend: {
+            colors: {
+                "main-area": "#ECF0F1",
+                sidebar: "#2980B9",
+                "header-footer": "#3498DB",
+                buttons: "#2C3E50",
+                selected: "#E74C3C",
+            },
             gridTemplateRows: {
                 10: "repeat(10, minmax(0, 1fr))",
             },

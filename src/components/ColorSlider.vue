@@ -14,7 +14,7 @@
             ref="textInput"
             type="text"
             v-model.number="state"
-            class="col-span-3 bg-[#F3FFE2] text-black outline-none dark:bg-slate-900 dark:text-white"
+            class="col-span-3 bg-main-area text-black outline-none dark:bg-slate-900 dark:text-white"
             @keypress.enter="removeFocus"
             minlength="1" />
     </div>
