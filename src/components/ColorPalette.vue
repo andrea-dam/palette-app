@@ -1,6 +1,6 @@
 <template>
     <!-- Area Card -->
-    <main class="row-span-8 bg-main-area pb-5 pt-6 dark:bg-slate-900">
+    <main class="row-span-8 motion-reduce:transition-all duration-1000 bg-main-area pb-5 pt-6 dark:bg-slate-900">
         <CardContainer v-if="selectedPalette === 1">
             <ColorCard v-for="card in openCards" :key="card" :card-number="card" :selected-palette="1" />
         </CardContainer>

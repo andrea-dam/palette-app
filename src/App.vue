@@ -14,7 +14,8 @@
         <!-- Schermata Principale -->
         <div class="col-span-10 grid grid-rows-10">
             <!-- Barra Titolo -->
-            <header class="row-span-1 flex items-center justify-between bg-header-footer px-6 dark:bg-slate-800">
+            <header
+                class="row-span-1 flex items-center justify-between bg-header-footer px-6 transition-all duration-300 dark:bg-slate-800">
                 <div class="flex w-36 flex-col drop-shadow">
                     <h1 class="text-2xl">Palette App</h1>
                     <h2 class="text-end text-xs italic">by Andrea Damiani</h2>
@@ -44,8 +45,17 @@
                 role="button"
                 @click="showPalette(palette)"
                 :class="{ active: palette === selectedPalette }"
-                class="relative flex h-12 w-full items-center rounded-lg bg-main-area px-6 text-lg font-medium text-buttons shadow-md hover:bg-[#EB7F00] dark:bg-slate-400 dark:text-slate-700 dark:hover:bg-slate-200">
-                <p>Palette {{ palette }}</p>
+                class="group relative flex h-12 w-full items-center rounded-lg bg-main-area px-6 text-lg font-medium text-buttons shadow-md hover:bg-[#EB7F00] dark:bg-slate-400 dark:text-slate-700 dark:hover:bg-slate-200">
+                <input v-if="isEditing" type="text" />
+                <p v-else>Palette {{ palette }}</p>
+
+                <!-- Pulsante Rinomina -->
+                <Icon
+                    icon="material-symbols:edit-square-outline"
+                    class="absolute right-5 hidden text-buttons group-hover:block z-20"
+                    role="button"
+                    @click="updateName(palette)"
+                    :class="{ active: palette === selectedPalette }" />
 
                 <!-- Pulsante Elimina Palette -->
                 <Icon
@@ -91,6 +101,14 @@ const removePalette = () => {
 const showPalette = palette => {
     selectedPalette.value = palette;
 };
+
+const isEditing = ref(false);
+
+// const updateName = palette => {
+//     if (palette === selectedPalette.value) {
+//         isEditing.value = true;
+//     }
+// };
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
