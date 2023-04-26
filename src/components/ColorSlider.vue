@@ -1,5 +1,5 @@
 <template>
-    <div class="grid w-full grid-cols-12 items-center justify-between gap-2">
+    <div class="grid w-full grid-cols-12 items-center justify-between gap-1.5">
         <!-- Label Slider -->
         <label
             :for="`${props.paletteNumber}${props.cardNumber}${props.sliderNumber}`"
@@ -11,7 +11,7 @@
         <input
             type="range"
             min="0"
-            step="0.5"
+            step="0.1"
             :max="props.max"
             v-model="state"
             @input="$emit('updateValue', state)"

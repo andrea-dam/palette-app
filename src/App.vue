@@ -46,14 +46,21 @@
                 @click="showPalette(palette)"
                 :class="{ active: palette === selectedPalette }"
                 class="group relative flex h-12 w-full items-center rounded-lg bg-main-area px-6 text-lg font-medium text-buttons shadow-md hover:bg-[#EB7F00] dark:bg-slate-400 dark:text-slate-700 dark:hover:bg-slate-200">
-                <input v-if="isEditing" type="text" />
-                <p v-else>Palette {{ palette }}</p>
+                <input
+                    v-if="paletteNames[palette - 1].isEditing"
+                    type="text"
+                    v-model="paletteNames[palette - 1].name"
+                    class="w-full"
+                    maxlength="10"
+                    @keypress.enter="paletteNames[palette - 1].isEditing = false" />
+                <p v-else>{{ paletteNames[palette - 1].name }}</p>
 
                 <!-- Pulsante Rinomina -->
                 <Icon
                     icon="material-symbols:edit-square-outline"
-                    class="absolute right-5 hidden text-buttons group-hover:block z-20"
+                    class="absolute right-5 z-20 hidden text-buttons group-hover:block"
                     role="button"
+                    v-if="!paletteNames[palette - 1].isEditing"
                     @click="updateName(palette)"
                     :class="{ active: palette === selectedPalette }" />
 
@@ -86,6 +93,19 @@ import DarkButton from "./components/DarkButton.vue";
 
 const paletteNumber = ref(1);
 
+const paletteNames = useStorage("palette-names", [
+    { id: 1, name: "Palette 1", isEditing: false },
+    { id: 2, name: "Palette 2", idEditing: false },
+    { id: 3, name: "Palette 3", idEditing: false },
+    { id: 4, name: "Palette 4", idEditing: false },
+    { id: 5, name: "Palette 5", idEditing: false },
+    { id: 6, name: "Palette 6", idEditing: false },
+    { id: 7, name: "Palette 7", idEditing: false },
+    { id: 8, name: "Palette 8", idEditing: false },
+    { id: 9, name: "Palette 9", idEditing: false },
+    { id: 10, name: "Palette 10", idEditing: false },
+]);
+
 const openPalettes = useStorage("palettes-aperte", paletteNumber);
 const selectedPalette = useStorage("palette-selezionata", 1);
 
@@ -102,13 +122,9 @@ const showPalette = palette => {
     selectedPalette.value = palette;
 };
 
-const isEditing = ref(false);
-
-// const updateName = palette => {
-//     if (palette === selectedPalette.value) {
-//         isEditing.value = true;
-//     }
-// };
+const updateName = palette => {
+    paletteNames.value[palette - 1].isEditing = !paletteNames.value[palette - 1].isEditing;
+};
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
