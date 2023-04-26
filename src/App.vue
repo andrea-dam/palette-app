@@ -94,16 +94,16 @@ import DarkButton from "./components/DarkButton.vue";
 const paletteNumber = ref(1);
 
 const paletteNames = useStorage("palette-names", [
-    { id: 1, name: "Palette 1", isEditing: false },
-    { id: 2, name: "Palette 2", idEditing: false },
-    { id: 3, name: "Palette 3", idEditing: false },
-    { id: 4, name: "Palette 4", idEditing: false },
-    { id: 5, name: "Palette 5", idEditing: false },
-    { id: 6, name: "Palette 6", idEditing: false },
-    { id: 7, name: "Palette 7", idEditing: false },
-    { id: 8, name: "Palette 8", idEditing: false },
-    { id: 9, name: "Palette 9", idEditing: false },
-    { id: 10, name: "Palette 10", idEditing: false },
+    { name: "Palette 1", isEditing: false },
+    { name: "Palette 2", idEditing: false },
+    { name: "Palette 3", idEditing: false },
+    { name: "Palette 4", idEditing: false },
+    { name: "Palette 5", idEditing: false },
+    { name: "Palette 6", idEditing: false },
+    { name: "Palette 7", idEditing: false },
+    { name: "Palette 8", idEditing: false },
+    { name: "Palette 9", idEditing: false },
+    { name: "Palette 10", idEditing: false },
 ]);
 
 const openPalettes = useStorage("palettes-aperte", paletteNumber);
