@@ -47,13 +47,16 @@
                 :class="{ active: palette === selectedPalette }"
                 class="group relative flex h-12 w-full items-center rounded-lg bg-main-area px-6 text-lg font-medium text-buttons shadow-md hover:bg-[#EB7F00] dark:bg-slate-400 dark:text-slate-700 dark:hover:bg-slate-200">
                 <!-- Nome Palette/Campo Input -->
-                <input
-                    v-if="paletteNames[palette - 1].isEditing"
-                    type="text"
-                    v-model="paletteNames[palette - 1].name"
-                    class="w-full"
-                    maxlength="10"
-                    @keypress.enter="paletteNames[palette - 1].isEditing = false" />
+                <form v-if="paletteNames[palette - 1].isEditing" @submit.prevent="paletteNames[palette - 1].isEditing = false">
+                    <input
+                        type="text"
+                        v-model.lazy="paletteNames[palette - 1].name"
+                        class="w-full"
+                        maxlength="10"
+                        spellcheck="false"
+                        @blur="paletteNames[palette - 1].isEditing = false"
+                        required />
+                </form>
                 <p v-else>{{ paletteNames[palette - 1].name }}</p>
 
                 <!-- Pulsante Rinomina -->
