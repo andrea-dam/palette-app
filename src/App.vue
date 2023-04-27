@@ -124,7 +124,7 @@ const showPalette = palette => {
 };
 
 const updateName = palette => {
-    paletteNames.value[palette - 1].isEditing = !paletteNames.value[palette - 1].isEditing;
+    paletteNames.value[palette - 1].isEditing = true;
 };
 
 const isDark = useDark();
