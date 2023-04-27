@@ -96,15 +96,15 @@ const paletteNumber = ref(1);
 
 const paletteNames = useStorage("palette-names", [
     { name: "Palette 1", isEditing: false },
-    { name: "Palette 2", idEditing: false },
-    { name: "Palette 3", idEditing: false },
-    { name: "Palette 4", idEditing: false },
-    { name: "Palette 5", idEditing: false },
-    { name: "Palette 6", idEditing: false },
-    { name: "Palette 7", idEditing: false },
-    { name: "Palette 8", idEditing: false },
-    { name: "Palette 9", idEditing: false },
-    { name: "Palette 10", idEditing: false },
+    { name: "Palette 2", isEditing: false },
+    { name: "Palette 3", isEditing: false },
+    { name: "Palette 4", isEditing: false },
+    { name: "Palette 5", isEditing: false },
+    { name: "Palette 6", isEditing: false },
+    { name: "Palette 7", isEditing: false },
+    { name: "Palette 8", isEditing: false },
+    { name: "Palette 9", isEditing: false },
+    { name: "Palette 10", isEditing: false },
 ]);
 
 const openPalettes = useStorage("palettes-aperte", paletteNumber);
