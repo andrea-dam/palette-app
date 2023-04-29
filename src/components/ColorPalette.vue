@@ -1,6 +1,6 @@
 <template>
     <!-- Area Card -->
-    <main class="row-span-8 motion-reduce:transition-all duration-1000 bg-main-area pb-5 pt-6 dark:bg-slate-900">
+    <main class="row-span-8 bg-main-area pb-5 pt-6 duration-1000 motion-reduce:transition-all dark:bg-slate-900">
         <CardContainer v-if="selectedPalette === 1">
             <ColorCard v-for="card in openCards" :key="card" :card-number="card" :selected-palette="1" />
         </CardContainer>
@@ -38,7 +38,7 @@
         class="row-span-1 grid grid-cols-2 items-center justify-center space-x-4 bg-header-footer dark:bg-slate-800">
         <!-- Pulsante Meno -->
         <div class="flex items-center justify-between space-x-2 pl-6">
-            <h3>Palette {{ selectedPalette }}</h3>
+            <h3>{{ name }}</h3>
             <SignButton v-show="cards > 1" @click="changeCards('-')" icon="ic:round-minus" />
         </div>
 
@@ -57,7 +57,7 @@ import CardContainer from "./CardContainer.vue";
 import ColorCard from "./ColorCard.vue";
 import SignButton from "./SignButton.vue";
 
-const props = defineProps(["selectedPalette"]);
+const props = defineProps(["selectedPalette", "name"]);
 
 const cards = ref(1);
 const openCards = useStorage(`carte-aperte-palette${props.selectedPalette}`, cards);
