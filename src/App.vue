@@ -14,14 +14,7 @@
         <!-- Schermata Principale -->
         <div class="col-span-10 grid grid-rows-10">
             <!-- Barra Titolo -->
-            <header
-                class="row-span-1 flex items-center justify-between bg-header-footer px-6 transition-all duration-300 dark:bg-slate-800">
-                <div class="flex w-36 flex-col drop-shadow">
-                    <h1 class="text-2xl">Palette App</h1>
-                    <h2 class="text-end text-xs italic">by Andrea Damiani</h2>
-                </div>
-                <DarkButton @click="toggleDark()" />
-            </header>
+            <TheHeader />
 
             <!-- Area Palette -->
             <ColorPalette v-if="selectedPalette === 1" :selected-palette="1" />
@@ -45,16 +38,18 @@
                 role="button"
                 @click="showPalette(palette)"
                 :class="{ active: palette === selectedPalette }"
-                class="group relative flex h-12 w-full items-center rounded-lg bg-main-area px-6 text-lg font-medium text-buttons shadow-md hover:bg-[#EB7F00] dark:bg-slate-400 dark:text-slate-700 dark:hover:bg-slate-200">
+                class="hover:bg-[#EB7F00] group relative flex h-12 w-full items-center justify-between rounded-lg bg-main-area px-6 text-lg font-medium text-buttons shadow-md dark:bg-slate-400 dark:text-slate-700 dark:hover:bg-slate-200">
                 <!-- Nome Palette/Campo Input -->
-                <form v-if="paletteNames[palette - 1].isEditing" @submit.prevent="paletteNames[palette - 1].isEditing = false">
+                <form
+                    v-if="paletteNames[palette - 1].isBeingEdited"
+                    @submit.prevent="paletteNames[palette - 1].isBeingEdited = false">
                     <input
                         type="text"
                         v-model.lazy="paletteNames[palette - 1].name"
                         class="w-full"
                         maxlength="10"
                         spellcheck="false"
-                        @blur="paletteNames[palette - 1].isEditing = false"
+                        @blur="paletteNames[palette - 1].isBeingEdited = false"
                         required />
                 </form>
                 <p v-else>{{ paletteNames[palette - 1].name }}</p>
@@ -62,17 +57,18 @@
                 <!-- Pulsante Rinomina -->
                 <Icon
                     icon="material-symbols:edit-square-outline"
-                    class="absolute right-5 z-20 hidden text-buttons group-hover:block"
+                    class="z-20 hidden text-buttons group-hover:block"
                     role="button"
-                    v-if="!paletteNames[palette - 1].isEditing"
+                    inline="true"
+                    v-if="!paletteNames[palette - 1].isBeingEdited"
                     @click="updateName(palette)"
                     :class="{ active: palette === selectedPalette }" />
 
                 <!-- Pulsante Elimina Palette -->
                 <Icon
-                    v-if="palette === openPalettes && openPalettes > 1"
+                    v-if="openPalettes > 1"
                     icon="ph:x-circle-bold"
-                    class="absolute -right-3 -top-2 z-20 m-0 rounded-full border-0 bg-white p-0 text-2xl text-red-600 outline-none dark:bg-slate-200"
+                    class="absolute -right-3 -top-2 z-20 m-0 hidden rounded-full border-0 bg-white p-0 text-2xl text-red-600 outline-none group-hover:block dark:bg-slate-200"
                     role="button"
                     @click="removePalette" />
             </div>
@@ -90,31 +86,21 @@
 
 <script setup>
 import { ref } from "vue";
-import { useStorage, useDark, useToggle, useWindowSize, useScreenOrientation } from "@vueuse/core";
+import { useStorage, useWindowSize, useScreenOrientation } from "@vueuse/core";
 
+import TheHeader from "./components/TheHeader.vue";
 import ColorPalette from "./components/ColorPalette.vue";
-import DarkButton from "./components/DarkButton.vue";
 
 const paletteNumber = ref(1);
 
-const paletteNames = useStorage("palette-names", [
-    { name: "Palette 1", isEditing: false },
-    { name: "Palette 2", isEditing: false },
-    { name: "Palette 3", isEditing: false },
-    { name: "Palette 4", isEditing: false },
-    { name: "Palette 5", isEditing: false },
-    { name: "Palette 6", isEditing: false },
-    { name: "Palette 7", isEditing: false },
-    { name: "Palette 8", isEditing: false },
-    { name: "Palette 9", isEditing: false },
-    { name: "Palette 10", isEditing: false },
-]);
+const paletteNames = useStorage("palette-names", [{ name: "Palette 1", isBeingEdited: false }]);
 
 const openPalettes = useStorage("palettes-aperte", paletteNumber);
 const selectedPalette = useStorage("palette-selezionata", 1);
 
 const addPalette = () => {
     paletteNumber.value++;
+    paletteNames.value.push({ name: `Palette ${paletteNumber.value}`, isBeingEdited: false });
     selectedPalette.value = paletteNumber.value;
 };
 
@@ -127,11 +113,8 @@ const showPalette = palette => {
 };
 
 const updateName = palette => {
-    paletteNames.value[palette - 1].isEditing = true;
+    paletteNames.value[palette - 1].isBeingEdited = true;
 };
-
-const isDark = useDark();
-const toggleDark = useToggle(isDark);
 
 const { width } = useWindowSize();
 const { orientation } = useScreenOrientation();
