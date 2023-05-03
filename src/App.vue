@@ -87,7 +87,7 @@
                 <!-- Pulsante Rinomina -->
                 <Icon
                     icon="material-symbols:edit-square-outline"
-                    class="z-20 hidden text-buttons group-hover:block"
+                    class="z-20 hidden text-buttons group-hover:block group-hover:bg-transparent"
                     role="button"
                     inline="true"
                     v-if="!palettes[palette - 1].isBeingEdited"
