@@ -37,7 +37,7 @@ const props = defineProps({
     cardNumber: Number,
     sliderNumber: Number,
     attributo: String,
-    max: String,
+    max: Number,
 });
 defineEmits(["updateValue"]);
 

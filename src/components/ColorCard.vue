@@ -8,24 +8,24 @@
             <ColorSlider
                 :palette-number="props.selectedPalette"
                 :card-number="cardNumber"
-                sliderNumber="1"
+                :sliderNumber="1"
                 attributo="H"
                 @update-value="value => (hue = value)"
-                max="360" />
+                :max="360" />
             <ColorSlider
                 :palette-number="props.selectedPalette"
                 :card-number="cardNumber"
-                sliderNumber="2"
+                :sliderNumber="2"
                 attributo="S"
                 @update-value="value => (saturation = value)"
-                max="100" />
+                :max="100" />
             <ColorSlider
                 :palette-number="props.selectedPalette"
                 :card-number="cardNumber"
-                sliderNumber="3"
+                :sliderNumber="3"
                 attributo="L"
                 @update-value="value => (lightness = value)"
-                max="100" />
+                :max="100" />
         </div>
 
         <!-- Pulsante Copia -->
@@ -43,7 +43,10 @@ import { ref, watch } from "vue";
 import { useStyleTag, useStorage, useClipboard } from "@vueuse/core";
 import ColorSlider from "../components/ColorSlider.vue";
 
-const props = defineProps({ cardNumber: Number, selectedPalette: Number });
+const props = defineProps({
+    cardNumber: Number,
+    selectedPalette: Number,
+});
 
 const hue = useStorage(`palette${props.selectedPalette}-card${props.cardNumber}-slider1`, (Math.random() * (360 - 0) + 0).toFixed(1));
 

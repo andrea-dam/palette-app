@@ -5,5 +5,7 @@
 </template>
 
 <script setup>
-defineProps(["icon"]);
+defineProps({
+    icon: String,
+});
 </script>

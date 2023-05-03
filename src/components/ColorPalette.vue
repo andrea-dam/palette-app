@@ -55,7 +55,10 @@ import CardContainer from "./CardContainer.vue";
 import ColorCard from "./ColorCard.vue";
 import SignButton from "./SignButton.vue";
 
-const props = defineProps({ selectedPalette: Number, name: String });
+const props = defineProps({
+    selectedPalette: Number,
+    name: String,
+});
 
 const openCards = useStorage(`carte-aperte-palette${props.selectedPalette}`, 1);
 
