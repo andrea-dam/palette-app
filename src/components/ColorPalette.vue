@@ -34,23 +34,21 @@
     </main>
 
     <!-- Barra Inferiore -->
-    <footer
-        class="row-span-1 grid grid-cols-2 items-center justify-center space-x-4 bg-header-footer dark:bg-slate-800">
+    <footer class="row-span-1 grid grid-cols-2 items-center justify-center space-x-4 bg-header-footer dark:bg-slate-800">
         <!-- Pulsante Meno -->
         <div class="flex items-center justify-between space-x-2 pl-6">
             <h3>{{ name }}</h3>
-            <SignButton v-show="cards > 1" @click="changeCards('-')" icon="ic:round-minus" />
+            <SignButton v-show="openCards > 1" @click="changeCards('-')" icon="ic:round-minus" />
         </div>
 
         <!-- Pulsante Più -->
         <div class="flex items-center space-x-2">
-            <SignButton v-show="cards < 5" @click="changeCards('+')" icon="ic:round-plus" />
+            <SignButton v-show="openCards < 5" @click="changeCards('+')" icon="ic:round-plus" />
         </div>
     </footer>
 </template>
 
 <script setup>
-import { ref } from "vue";
 import { useStorage } from "@vueuse/core";
 
 import CardContainer from "./CardContainer.vue";
@@ -59,20 +57,9 @@ import SignButton from "./SignButton.vue";
 
 const props = defineProps(["selectedPalette", "name"]);
 
-const cards = ref(1);
-const openCards = useStorage(`carte-aperte-palette${props.selectedPalette}`, cards);
+const openCards = useStorage(`carte-aperte-palette${props.selectedPalette}`, 1);
 
 const changeCards = sign => {
-    if (sign === "+") {
-        if (cards.value === 5) {
-        } else {
-            cards.value++;
-        }
-    } else {
-        if (cards.value === 1) {
-        } else {
-            cards.value--;
-        }
-    }
+    sign === "+" ? openCards.value++ : openCards.value--;
 };
 </script>
