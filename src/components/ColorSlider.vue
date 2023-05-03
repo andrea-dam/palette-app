@@ -16,7 +16,7 @@
             v-model="state"
             @input="$emit('updateValue', state)"
             :id="`${props.paletteNumber}${props.cardNumber}${props.sliderNumber}`"
-            class="transparent col-span-8 h-1.5 w-full cursor-grab appearance-none border-transparent bg-neutral-200 active:cursor-grabbing dark:bg-slate-600" />
+            class="col-span-8 h-1.5 w-full cursor-grab appearance-none bg-neutral-200 active:cursor-grabbing dark:bg-slate-600 rounded" />
 
         <!-- Text Input Slider -->
         <input
