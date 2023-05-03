@@ -1,6 +1,6 @@
 <template>
     <!-- Area Card -->
-    <main class="row-span-8 bg-main-area pb-5 pt-6 duration-1000 motion-reduce:transition-all dark:bg-slate-900">
+    <main class="row-span-8 bg-main-area pb-5 pt-6 duration-1000 dark:bg-slate-900">
         <CardContainer v-if="selectedPalette === 1">
             <ColorCard v-for="card in openCards" :key="card" :card-number="card" :selected-palette="1" />
         </CardContainer>
@@ -55,7 +55,7 @@ import CardContainer from "./CardContainer.vue";
 import ColorCard from "./ColorCard.vue";
 import SignButton from "./SignButton.vue";
 
-const props = defineProps(["selectedPalette", "name"]);
+const props = defineProps({ selectedPalette: Number, name: String });
 
 const openCards = useStorage(`carte-aperte-palette${props.selectedPalette}`, 1);
 

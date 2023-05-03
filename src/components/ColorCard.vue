@@ -43,12 +43,9 @@ import { ref, watch } from "vue";
 import { useStyleTag, useStorage, useClipboard } from "@vueuse/core";
 import ColorSlider from "../components/ColorSlider.vue";
 
-const props = defineProps(["cardNumber", "selectedPalette"]);
+const props = defineProps({ cardNumber: Number, selectedPalette: Number });
 
-const hue = useStorage(
-    `palette${props.selectedPalette}-card${props.cardNumber}-slider1`,
-    (Math.random() * (360 - 0) + 0).toFixed(1)
-);
+const hue = useStorage(`palette${props.selectedPalette}-card${props.cardNumber}-slider1`, (Math.random() * (360 - 0) + 0).toFixed(1));
 
 const saturation = useStorage(
     `palette${props.selectedPalette}-card${props.cardNumber}-slider2`,
@@ -59,12 +56,9 @@ let saturationPercentage = `${saturation.value}%`;
 const lightness = useStorage(`palette${props.selectedPalette}-card${props.cardNumber}-slider3`, 50);
 let lightnessPercentage = `${lightness.value}%`;
 
-const css = useStyleTag(
-    `#card${props.cardNumber} { background-color: hsl(${hue.value}, ${saturation.value}%, ${lightness.value}%) }`,
-    {
-        id: `id${props.cardNumber}`,
-    }
-);
+const css = useStyleTag(`#card${props.cardNumber} { background-color: hsl(${hue.value}, ${saturation.value}%, ${lightness.value}%) }`, {
+    id: `id${props.cardNumber}`,
+});
 
 watch(hue, newValue => {
     if (newValue) {

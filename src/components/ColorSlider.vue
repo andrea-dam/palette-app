@@ -1,11 +1,9 @@
 <template>
     <div class="grid w-full grid-cols-12 items-center justify-between gap-1.5">
         <!-- Label Slider -->
-        <label
-            :for="`${props.paletteNumber}${props.cardNumber}${props.sliderNumber}`"
-            class="col-span-1 text-black dark:text-white"
-            >{{ props.attributo }}</label
-        >
+        <label :for="`${props.paletteNumber}${props.cardNumber}${props.sliderNumber}`" class="col-span-1 text-black dark:text-white">{{
+            props.attributo
+        }}</label>
 
         <!-- Slider -->
         <input
@@ -16,7 +14,7 @@
             v-model="state"
             @input="$emit('updateValue', state)"
             :id="`${props.paletteNumber}${props.cardNumber}${props.sliderNumber}`"
-            class="col-span-8 h-1.5 w-full cursor-grab appearance-none bg-neutral-200 active:cursor-grabbing dark:bg-slate-600 rounded" />
+            class="col-span-8 h-1.5 w-full cursor-grab appearance-none rounded bg-neutral-200 active:cursor-grabbing dark:bg-slate-600" />
 
         <!-- Text Input Slider -->
         <input
@@ -34,7 +32,13 @@
 import { ref, watch } from "vue";
 import { useStorage } from "@vueuse/core";
 
-const props = defineProps(["paletteNumber", "cardNumber", "sliderNumber", "attributo", "max"]);
+const props = defineProps({
+    paletteNumber: Number,
+    cardNumber: Number,
+    sliderNumber: Number,
+    attributo: String,
+    max: String,
+});
 defineEmits(["updateValue"]);
 
 const defaultState = ref((Math.random() * (100 - 50) + 50).toFixed(1));
