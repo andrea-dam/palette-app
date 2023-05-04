@@ -55,10 +55,20 @@ const saturation = useStorage(
     `palette${props.selectedPalette}-card${props.cardNumber}-slider2`,
     (Math.random() * (100 - 50) + 50).toFixed(1)
 );
-let saturationPercentage = `${saturation.value}%`;
+const saturationPercentage = computed(() => {
+    return `${saturation.value}%`;
+});
+const saturationForConversion = computed(() => {
+    return saturation.value / 100;
+});
 
 const lightness = useStorage(`palette${props.selectedPalette}-card${props.cardNumber}-slider3`, 50);
-let lightnessPercentage = `${lightness.value}%`;
+const lightnessPercentage = computed(() => {
+    return `${lightness.value}%`;
+});
+const lightnessForConversion = computed(() => {
+    return lightness.value / 100;
+});
 
 const css = useStyleTag(`#card${props.cardNumber} { background-color: hsl(${hue.value}, ${saturation.value}%, ${lightness.value}%) }`, {
     id: `id${props.cardNumber}`,
@@ -67,7 +77,7 @@ const css = useStyleTag(`#card${props.cardNumber} { background-color: hsl(${hue.
 watch(hue, newValue => {
     if (newValue) {
         css.value = useStyleTag(
-            `#card${props.cardNumber} { background-color: hsl(${newValue}, ${saturationPercentage}, ${lightnessPercentage}) }`,
+            `#card${props.cardNumber} { background-color: hsl(${newValue}, ${saturationPercentage.value}, ${lightnessPercentage.value}) }`,
             {
                 id: `id${props.cardNumber}`,
             }
@@ -76,9 +86,9 @@ watch(hue, newValue => {
 });
 watch(saturation, newValue => {
     if (newValue) {
-        saturationPercentage = `${newValue}%`;
+        saturationPercentage.value = `${newValue}%`;
         css.value = useStyleTag(
-            `#card${props.cardNumber} { background-color: hsl(${hue.value}, ${saturationPercentage}, ${lightnessPercentage}) }`,
+            `#card${props.cardNumber} { background-color: hsl(${hue.value}, ${saturationPercentage.value}, ${lightnessPercentage.value}) }`,
             {
                 id: `id${props.cardNumber}`,
             }
@@ -87,9 +97,9 @@ watch(saturation, newValue => {
 });
 watch(lightness, newValue => {
     if (newValue) {
-        lightnessPercentage = `${newValue}%`;
+        lightnessPercentage.value = `${newValue}%`;
         css.value = useStyleTag(
-            `#card${props.cardNumber} { background-color: hsl(${hue.value}, ${saturationPercentage}, ${lightnessPercentage}) }`,
+            `#card${props.cardNumber} { background-color: hsl(${hue.value}, ${saturationPercentage.value}, ${lightnessPercentage.value}) }`,
             {
                 id: `id${props.cardNumber}`,
             }
@@ -98,13 +108,6 @@ watch(lightness, newValue => {
 });
 
 // Logica Conversione
-
-const saturationForConversion = computed(() => {
-    return saturation.value / 100;
-});
-const lightnessForConversion = computed(() => {
-    return lightness.value / 100;
-});
 
 const c = computed(() => {
     return (1 - (lightnessForConversion.value * 2 - 1)) * saturationForConversion.value;
@@ -153,7 +156,7 @@ let g = (g1 + m.value) * 255;
 let b = (b1 + m.value) * 255;
 
 const result = computed(() => {
-    return props.convertToRgb ? `rgb(${r}, ${g}, ${b})` : `hsl(${hue.value}, ${saturationPercentage}, ${lightnessPercentage})`;
+    return props.convertToRgb ? `rgb(${r}, ${g}, ${b})` : `hsl(${hue.value}, ${saturationPercentage.value}, ${lightnessPercentage.value})`;
 });
 
 const { copy, copied } = useClipboard({ result });
