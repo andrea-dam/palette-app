@@ -97,55 +97,60 @@ watch(lightness, newValue => {
     }
 });
 
-// Sezione Conversione
+// Logica Conversione
 
 const saturationForConversion = computed(() => {
     return saturation.value / 100;
 });
+const lightnessForConversion = computed(() => {
+    return lightness.value / 100;
+});
 
 const c = computed(() => {
-    return (1 - (lightness.value * 2 - 1)) * saturationForConversion.value;
+    return (1 - (lightnessForConversion.value * 2 - 1)) * saturationForConversion.value;
 });
 
 const x = computed(() => {
-    return c * (1 - (((H / 60) % 2) - 1));
+    return c.value * (1 - (((hue.value / 60) % 2) - 1));
 });
 
 const m = computed(() => {
-    return lightness.value - c / 2;
+    return lightnessForConversion.value - c.value / 2;
 });
 
-let r1, g1, b1;
+const r1 = ref(null);
+const g1 = ref(null);
+const b1 = ref(null);
 
 if (hue.value >= 0 && hue.value < 60) {
-    r1 = c;
-    g1 = x;
-    b1 = 0;
+    r1.value = c.value;
+    g1.value = x.value;
+    b1.value = 0;
 } else if (hue.value >= 60 && hue.value < 120) {
-    r1 = x;
-    g1 = c;
-    b1 = 0;
+    r1.value = x.value;
+    g1.value = c.value;
+    b1.value = 0;
 } else if (hue.value >= 120 && hue.value < 180) {
-    r1 = 0;
-    g1 = c;
-    b1 = x;
+    r1.value = 0;
+    g1.value = c.value;
+    b1.value = x.value;
 } else if (hue.value >= 180 && hue.value < 240) {
-    r1 = 0;
-    g1 = x;
-    b1 = c;
+    r1.value = 0;
+    g1.value = x.value;
+    b1.value = c.value;
 } else if (hue.value >= 240 && hue.value < 300) {
-    r1 = x;
-    g1 = 0;
-    b1 = c;
+    r1.value = x.value;
+    g1.value = 0;
+    b1.value = c.value;
 } else if (hue.value >= 300 && hue.value <= 360) {
-    r1 = c;
-    g1 = 0;
-    b1 = x;
+    r1.value = c.value;
+    g1.value = 0;
+    b1.value = x.value;
 }
 
-let r = (r1 + m) * 255;
-let g = (g1 + m) * 255;
-let b = (b1 + m) * 255;
+let r = (r1 + m.value) * 255;
+let g = (g1 + m.value) * 255;
+let b = (b1 + m.value) * 255;
 
 const result = computed(() => {
     return props.convertToRgb ? `rgb(${r}, ${g}, ${b})` : `hsl(${hue.value}, ${saturationPercentage}, ${lightnessPercentage})`;
