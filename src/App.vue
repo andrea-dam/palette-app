@@ -17,10 +17,7 @@
             <TheHeader />
 
             <!-- Area Palette -->
-            <ColorPalette
-                v-if="selectedPalette === 1"
-                :selected-palette="palettes[0].id"
-                :name="palettes[0].name" />
+            <ColorPalette v-if="selectedPalette === 1" :selected-palette="palettes[0].id" :name="palettes[0].name" />
             <ColorPalette
                 v-else-if="selectedPalette === 2"
                 :selected-palette="palettes[1].id"
@@ -68,7 +65,7 @@
                 role="button"
                 @click="showPalette(palette)"
                 :class="{ active: palette === selectedPalette }"
-                class="hover:bg-[#EB7F00] group relative flex h-12 w-full items-center justify-between rounded-lg bg-main-area px-6 text-lg font-medium text-buttons shadow-md dark:bg-slate-400 dark:text-slate-700 dark:hover:bg-slate-200">
+                class="group relative flex h-12 w-full items-center justify-between rounded-lg bg-main-area px-6 text-lg font-medium text-buttons shadow-md hover:bg-[#EB7F00] dark:bg-slate-400 dark:text-slate-700 dark:hover:bg-slate-200">
                 <!-- Nome Palette/Campo Input -->
                 <form
                     v-if="palettes[palette - 1].isBeingEdited"
@@ -107,7 +104,12 @@
             <button
                 v-show="totalPalettes < 10"
                 @click="addPalette"
-                class="flex h-12 w-full items-center justify-center rounded-lg bg-main-area shadow-md dark:bg-slate-500">
+                @mouseover="showTooltip"
+                @mouseleave="hideTooltip"
+                class="relative flex h-12 w-full items-center justify-center rounded-lg bg-main-area shadow-md dark:bg-slate-500">
+                <BaseTooltip ref="paletteAddTooltip" class="-left-52 right-52"
+                    >Clicca qui per aggiungere una nuova Palette</BaseTooltip
+                >
                 <Icon icon="ic:round-plus" class="text-5xl text-sidebar dark:text-slate-300" />
             </button>
         </aside>
@@ -120,8 +122,10 @@ import { useStorage, useWindowSize, useScreenOrientation } from "@vueuse/core";
 
 import TheHeader from "./components/TheHeader.vue";
 import ColorPalette from "./components/ColorPalette.vue";
+import BaseTooltip from "./components/BaseTooltip.vue";
 
 const totalPalettes = ref(1);
+const paletteAddTooltip = ref(null);
 
 const palettes = useStorage("palette-names", [{ id: 1, name: "Palette 1", isBeingEdited: false }]);
 
@@ -146,6 +150,9 @@ const showPalette = palette => {
 const updateName = palette => {
     palettes.value[palette - 1].isBeingEdited = true;
 };
+
+const showTooltip = () => paletteAddTooltip.value.tooltip.show();
+const hideTooltip = () => paletteAddTooltip.value.tooltip.close();
 
 const { width } = useWindowSize();
 const { orientation } = useScreenOrientation();

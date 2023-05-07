@@ -2,7 +2,12 @@
     <!-- Area Card -->
     <main class="row-span-8 bg-main-area pb-5 pt-6 duration-1000 dark:bg-slate-900">
         <CardContainer v-if="selectedPalette === 1">
-            <ColorCard v-for="card in openCards" :key="card" :card-number="card" :selected-palette="1" :convert-to-rgb="isRGB" />
+            <ColorCard
+                v-for="card in openCards"
+                :key="card"
+                :card-number="card"
+                :selected-palette="1"
+                :convert-to-rgb="isRGB" />
         </CardContainer>
         <CardContainer v-else-if="selectedPalette === 2">
             <ColorCard v-for="card in openCards" :key="card" :card-number="card" :selected-palette="2" />
@@ -41,13 +46,20 @@
         <!-- Pulsanti Modifica Carte -->
         <div class="grid grid-cols-2 items-center gap-2">
             <!-- Pulsante Meno -->
-            <div>
-                <SignButton v-show="openCards > 1" @click="changeCards('-')" icon="ic:round-minus" />
+            <div class="relative">
+                <BaseTooltip ref="cardRemoveTooltip" class="-right-20 left-40">Rimuovi Card</BaseTooltip>
+                <SignButton
+                    @mouseover="showTooltip"
+                    @mouseleave="hideTooltip"
+                    v-show="openCards > 1"
+                    @click="changeCards('-')"
+                    icon="ic:round-minus" />
             </div>
 
             <!-- Pulsante Più -->
-            <div>
+            <div class="relative">
                 <SignButton v-show="openCards < 5" @click="changeCards('+')" icon="ic:round-plus" />
+                <BaseTooltip ref="cardAddTooltip">Aggiungi Card</BaseTooltip>
             </div>
         </div>
 
@@ -72,11 +84,15 @@ import { useStorage, useToggle } from "@vueuse/core";
 import CardContainer from "./CardContainer.vue";
 import ColorCard from "./ColorCard.vue";
 import SignButton from "./SignButton.vue";
+import BaseTooltip from "./BaseTooltip.vue";
 
 const props = defineProps({
     selectedPalette: Number,
     name: String,
 });
+
+const cardAddTooltip = ref(null);
+const cardRemoveTooltip = ref(null);
 
 const isRGB = ref(false);
 const toggleRGB = useToggle(isRGB);
@@ -86,4 +102,7 @@ const openCards = useStorage(`carte-aperte-palette${props.selectedPalette}`, 1);
 const changeCards = sign => {
     sign === "+" ? openCards.value++ : openCards.value--;
 };
+
+const showTooltip = () => cardRemoveTooltip.value.tooltip.show();
+const hideTooltip = () => cardRemoveTooltip.value.tooltip.close();
 </script>
