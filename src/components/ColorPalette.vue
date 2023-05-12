@@ -63,17 +63,17 @@
 
             <dialog
                 ref="confirmation"
-                class="w-1/2 select-none space-y-8 rounded border-4 border-blue-500 text-center shadow-2xl dark:border-slate-100 dark:bg-slate-700 dark:text-white">
-                <div ref="target">
-                    <div class="space-y-10">
+                class="w-1/2 select-none space-y-8 rounded border-4 border-blue-500 text-center shadow-2xl dark:border-slate-100 dark:bg-slate-700 dark:text-white p-8">
+                <div ref="target" class="relative space-y-8">
+                    <div class="space-y-6 text-2xl">
                         <p>Performing this action will reset this palette's colors and generate random ones.</p>
                         <p>Are you sure you want to continue?</p>
                     </div>
-                    <div class="flex items-center gap-1 self-center">
+                    <div class="absolute bottom-2 flex items-center gap-1 self-center">
                         <label for="ask-again" class="text-base">Don't Ask Again</label>
                         <input type="checkbox" id="ask-again" v-model="dontAskAgain" />
                     </div>
-                    <form method="dialog" class="relative flex justify-center gap-10 text-xl" @submit="randomColors">
+                    <form method="dialog" class="flex justify-center gap-10 text-xl" @submit="randomColors">
                         <div class="space-x-6">
                             <BaseButton class="bg-green-700 hover:bg-green-600" type="submit">Yes</BaseButton>
                             <BaseButton class="bg-red-700 hover:bg-red-600" @click.prevent="confirmation.close()">No</BaseButton>
