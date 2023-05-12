@@ -71,11 +71,9 @@ const css = useStyleTag(`#card${props.cardNumber} { background-color: hsl(${hue.
 });
 
 watch([hue, saturation, lightness], ([newHue, newSaturation, newLightness]) => {
-    if ((newHue, newSaturation, newLightness)) {
-        css.value = useStyleTag(`#card${props.cardNumber} { background-color: hsl(${newHue}, ${newSaturation}%, ${newLightness}%) }`, {
-            id: `id${props.cardNumber}`,
-        });
-    }
+    css.value = useStyleTag(`#card${props.cardNumber} { background-color: hsl(${newHue}, ${newSaturation}%, ${newLightness}%) }`, {
+        id: `id${props.cardNumber}`,
+    });
 });
 
 // Logica Conversione
