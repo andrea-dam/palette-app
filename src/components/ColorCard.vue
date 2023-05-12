@@ -100,7 +100,6 @@ const rgb1 = ref([null, null, null]);
 watch(hue, newHue => {
     if (newHue >= 0 && newHue < 60) {
         rgb1.value = [c.value, x.value, 0];
-        console.log(rgb1.value);
     } else if (newHue >= 60 && newHue < 120) {
         r1.value = x.value;
         g1.value = c.value;

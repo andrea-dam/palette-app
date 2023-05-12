@@ -30,7 +30,7 @@
         </div>
 
         <!-- Barra Laterale -->
-        <aside class="z-10 col-span-2 flex flex-col items-center justify-between bg-sidebar p-5 dark:bg-slate-700">
+        <aside class="z-10 col-span-2 flex flex-col items-center justify-between transition-colors duration-1000 bg-sidebar p-5 dark:bg-slate-700">
             <div class="w-full space-y-2">
                 <!-- Pulsanti Palette -->
                 <div
