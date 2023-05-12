@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import { computed, onUpdated, reactive, ref, watch } from "vue";
+import { computed, onUpdated, ref, watch } from "vue";
 import { useStyleTag, useStorage, useClipboard } from "@vueuse/core";
 import ColorSlider from "../components/ColorSlider.vue";
 
@@ -55,17 +55,13 @@ const saturation = useStorage(
     `palette${props.selectedPalette}-card${props.cardNumber}-slider2`,
     (Math.random() * (100 - 50) + 50).toFixed(1)
 );
-const saturationPercentage = computed(() => {
-    return `${saturation.value}%`;
-});
+
 const saturationForConversion = computed(() => {
     return saturation.value / 100;
 });
 
 const lightness = useStorage(`palette${props.selectedPalette}-card${props.cardNumber}-slider3`, 50);
-const lightnessPercentage = computed(() => {
-    return `${lightness.value}%`;
-});
+
 const lightnessForConversion = computed(() => {
     return lightness.value / 100;
 });
@@ -74,36 +70,11 @@ const css = useStyleTag(`#card${props.cardNumber} { background-color: hsl(${hue.
     id: `id${props.cardNumber}`,
 });
 
-watch(hue, newValue => {
-    if (newValue) {
-        css.value = useStyleTag(
-            `#card${props.cardNumber} { background-color: hsl(${newValue}, ${saturationPercentage.value}, ${lightnessPercentage.value}) }`,
-            {
-                id: `id${props.cardNumber}`,
-            }
-        );
-    }
-});
-watch(saturation, newValue => {
-    if (newValue) {
-        saturationPercentage.value = `${newValue}%`;
-        css.value = useStyleTag(
-            `#card${props.cardNumber} { background-color: hsl(${hue.value}, ${saturationPercentage.value}, ${lightnessPercentage.value}) }`,
-            {
-                id: `id${props.cardNumber}`,
-            }
-        );
-    }
-});
-watch(lightness, newValue => {
-    if (newValue) {
-        lightnessPercentage.value = `${newValue}%`;
-        css.value = useStyleTag(
-            `#card${props.cardNumber} { background-color: hsl(${hue.value}, ${saturationPercentage.value}, ${lightnessPercentage.value}) }`,
-            {
-                id: `id${props.cardNumber}`,
-            }
-        );
+watch([hue, saturation, lightness], ([newHue, newSaturation, newLightness]) => {
+    if ((newHue, newSaturation, newLightness)) {
+        css.value = useStyleTag(`#card${props.cardNumber} { background-color: hsl(${newHue}, ${newSaturation}%, ${newLightness}%) }`, {
+            id: `id${props.cardNumber}`,
+        });
     }
 });
 

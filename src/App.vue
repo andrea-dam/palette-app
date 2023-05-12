@@ -81,7 +81,7 @@
                 </button>
             </div>
 
-            <a href="https://andrea-dam.gitlab.io/tailwind-colors/" target="_blank" class="flex items-center gap-2 text-xl font-thin italic"
+            <a href="https://andrea-dam.gitlab.io/tailwind-colors/" target="_blank" class="flex items-center gap-2 text-xl italic"
                 >Tailwind Colors<Icon icon="tabler:external-link"
             /></a>
         </aside>
