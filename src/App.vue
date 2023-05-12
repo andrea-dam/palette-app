@@ -12,7 +12,7 @@
     <!-- App Desktop -->
     <div v-else class="grid h-screen grid-cols-12">
         <!-- Schermata Principale -->
-        <div class="col-span-10 grid grid-rows-10">
+        <div class="col-span-10 grid grid-rows-12">
             <!-- Barra Titolo -->
             <TheHeader />
 

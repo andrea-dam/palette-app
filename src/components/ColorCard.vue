@@ -39,15 +39,16 @@
 </template>
 
 <script setup>
-import { computed, onUpdated, ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { useStyleTag, useStorage, useClipboard } from "@vueuse/core";
 import ColorSlider from "../components/ColorSlider.vue";
 
 const props = defineProps({
     cardNumber: Number,
     selectedPalette: Number,
-    convertToRgb: Boolean,
 });
+
+const convertToRgb = useStorage("convert-to-rgb");
 
 const hue = useStorage(`palette${props.selectedPalette}-card${props.cardNumber}-slider1`, (Math.random() * (360 - 0) + 0).toFixed(1));
 
@@ -90,45 +91,45 @@ const m = computed(() => {
     return lightnessForConversion.value - c.value / 2;
 });
 
-// const r1 = ref(null);
-// const g1 = ref(null);
-// const b1 = ref(null);
+const r1 = ref(null);
+const g1 = ref(null);
+const b1 = ref(null);
 
 const rgb1 = ref([null, null, null]);
 
-onUpdated(() => {
-    if (hue.value >= 0 && hue.value < 60) {
+watch(hue, newHue => {
+    if (newHue >= 0 && newHue < 60) {
         rgb1.value = [c.value, x.value, 0];
         console.log(rgb1.value);
-    } else if (hue.value >= 60 && hue.value < 120) {
+    } else if (newHue >= 60 && newHue < 120) {
         r1.value = x.value;
         g1.value = c.value;
         b1.value = 0;
-    } else if (hue.value >= 120 && hue.value < 180) {
+    } else if (newHue >= 120 && newHue < 180) {
         r1.value = 0;
         g1.value = c.value;
         b1.value = x.value;
-    } else if (hue.value >= 180 && hue.value < 240) {
+    } else if (newHue >= 180 && newHue < 240) {
         r1.value = 0;
         g1.value = x.value;
         b1.value = c.value;
-    } else if (hue.value >= 240 && hue.value < 300) {
+    } else if (newHue >= 240 && newHue < 300) {
         r1.value = x.value;
         g1.value = 0;
         b1.value = c.value;
-    } else if (hue.value >= 300 && hue.value <= 360) {
+    } else if (newHue >= 300 && newHue <= 360) {
         r1.value = c.value;
         g1.value = 0;
         b1.value = x.value;
     }
 });
 
-// let r = (r1 + m.value) * 255;
-// let g = (g1 + m.value) * 255;
-// let b = (b1 + m.value) * 255;
+let r = (r1.value + m.value) * 255;
+let g = (g1.value + m.value) * 255;
+let b = (b1.value + m.value) * 255;
 
 const result = computed(() => {
-    return props.convertToRgb ? `rgb(${r}, ${g}, ${b})` : `hsl(${hue.value}, ${saturationPercentage.value}, ${lightnessPercentage.value})`;
+    return convertToRgb.value ? `rgb(${r}, ${g}, ${b})` : `hsl(${hue.value}, ${saturation.value}, ${lightness.value})`;
 });
 
 const { copy, copied } = useClipboard({ result });
