@@ -1,7 +1,7 @@
 <template>
     <!-- Schermata Mobile -->
     <div
-        v-if="(width <= 1024 && orientation === 'portrait-primary') || orientation === 'landscape-primary'"
+        v-if="(width <= 1024 && orientation === 'portrait-primary') || (width <= 1024 && orientation === 'landscape-primary')"
         class="flex h-screen w-screen flex-col items-center justify-center space-y-5 bg-slate-900 p-10">
         <h1 class="text-5xl">Palette App</h1>
         <h2 class="text-2xl italic">by Andrea Damiani</h2>
