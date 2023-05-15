@@ -6,21 +6,21 @@
         <!-- Sezione Slider -->
         <div>
             <ColorSlider
-                :palette-number="props.selectedPalette"
+                :palette-number="selectedPalette"
                 :card-number="cardNumber"
                 :sliderNumber="1"
                 attributo="H"
                 @update-value="value => (hue = value)"
                 :max="360" />
             <ColorSlider
-                :palette-number="props.selectedPalette"
+                :palette-number="selectedPalette"
                 :card-number="cardNumber"
                 :sliderNumber="2"
                 attributo="S"
                 @update-value="value => (saturation = value)"
                 :max="100" />
             <ColorSlider
-                :palette-number="props.selectedPalette"
+                :palette-number="selectedPalette"
                 :card-number="cardNumber"
                 :sliderNumber="3"
                 attributo="L"
