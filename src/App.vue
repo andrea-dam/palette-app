@@ -17,16 +17,16 @@
             <TheHeader />
 
             <!-- Area Palette -->
-            <ColorPalette v-if="selectedPalette === 1" :selected-palette="palettes[0].id" :name="palettes[0].name" />
-            <ColorPalette v-else-if="selectedPalette === 2" :selected-palette="palettes[1].id" :name="palettes[1].name" />
-            <ColorPalette v-else-if="selectedPalette === 3" :selected-palette="palettes[2].id" :name="palettes[2].name" />
-            <ColorPalette v-else-if="selectedPalette === 4" :selected-palette="palettes[3].id" :name="palettes[3].name" />
-            <ColorPalette v-else-if="selectedPalette === 5" :selected-palette="palettes[4].id" :name="palettes[4].name" />
-            <ColorPalette v-else-if="selectedPalette === 6" :selected-palette="palettes[5].id" :name="palettes[5].name" />
-            <ColorPalette v-else-if="selectedPalette === 7" :selected-palette="palettes[6].id" :name="palettes[6].name" />
-            <ColorPalette v-else-if="selectedPalette === 8" :selected-palette="palettes[7].id" :name="palettes[7].name" />
-            <ColorPalette v-else-if="selectedPalette === 9" :selected-palette="palettes[8].id" :name="palettes[8].name" />
-            <ColorPalette v-else-if="selectedPalette === 10" :selected-palette="palettes[9].id" :name="palettes[9].name" />
+            <ColorPalette v-if="selectedPalette === 1" :selected-palette="1" :name="palettes[0].name" />
+            <ColorPalette v-else-if="selectedPalette === 2" :selected-palette="2" :name="palettes[1].name" />
+            <ColorPalette v-else-if="selectedPalette === 3" :selected-palette="3" :name="palettes[2].name" />
+            <ColorPalette v-else-if="selectedPalette === 4" :selected-palette="4" :name="palettes[3].name" />
+            <ColorPalette v-else-if="selectedPalette === 5" :selected-palette="5" :name="palettes[4].name" />
+            <ColorPalette v-else-if="selectedPalette === 6" :selected-palette="6" :name="palettes[5].name" />
+            <ColorPalette v-else-if="selectedPalette === 7" :selected-palette="7" :name="palettes[6].name" />
+            <ColorPalette v-else-if="selectedPalette === 8" :selected-palette="8" :name="palettes[7].name" />
+            <ColorPalette v-else-if="selectedPalette === 9" :selected-palette="9" :name="palettes[8].name" />
+            <ColorPalette v-else-if="selectedPalette === 10" :selected-palette="10" :name="palettes[9].name" />
         </div>
 
         <!-- Barra Laterale -->
@@ -35,24 +35,24 @@
             <div class="w-full space-y-2">
                 <!-- Pulsanti Palette -->
                 <div
-                    v-for="palette in openPalettes"
+                    v-for="(palette, index) in openPalettes"
                     :key="palette"
                     role="button"
                     @click="showPalette(palette)"
                     :class="{ active: palette === selectedPalette }"
                     class="group relative flex h-12 w-full items-center justify-between rounded-lg bg-main-area px-6 text-lg font-medium text-buttons shadow-md hover:bg-[#EB7F00] dark:bg-slate-400 dark:text-slate-700 dark:hover:bg-slate-200">
                     <!-- Nome Palette/Campo Input -->
-                    <form v-if="palettes[palette - 1].isBeingEdited" @submit.prevent="palettes[palette - 1].isBeingEdited = false">
+                    <form v-if="palettes[index].isBeingEdited" @submit.prevent="palettes[index].isBeingEdited = false">
                         <input
                             type="text"
-                            v-model.lazy="palettes[palette - 1].name"
+                            v-model.lazy="palettes[index].name"
                             class="w-full"
                             maxlength="10"
                             spellcheck="false"
-                            @blur="palettes[palette - 1].isBeingEdited = false"
+                            @blur="palettes[index].isBeingEdited = false"
                             required />
                     </form>
-                    <p v-else>{{ palettes[palette - 1].name }}</p>
+                    <p v-else>{{ palettes[index].name }}</p>
 
                     <!-- Pulsante Rinomina -->
                     <Icon
@@ -60,7 +60,7 @@
                         class="z-20 hidden text-buttons group-hover:block group-hover:bg-transparent"
                         role="button"
                         inline="true"
-                        v-if="!palettes[palette - 1].isBeingEdited"
+                        v-if="!palettes[index].isBeingEdited"
                         @click="updateName(palette)"
                         :class="{ active: palette === selectedPalette }" />
 
@@ -70,12 +70,12 @@
                         icon="ph:x-circle-bold"
                         class="absolute -right-3 -top-2 z-20 m-0 hidden rounded-full border-0 bg-white p-0 text-2xl text-red-600 outline-none group-hover:block dark:bg-slate-200"
                         role="button"
-                        @click="removePalette(palette - 1)" />
+                        @click="removePalette(palette)" />
                 </div>
 
                 <!-- Pulsante Aggiungi Palette -->
                 <button
-                    v-show="totalPalettes < 10"
+                    v-show="openPalettes < 10"
                     @click="addPalette"
                     class="flex h-12 w-full items-center justify-center rounded-lg bg-main-area shadow-md dark:bg-slate-500">
                     <Icon icon="ic:round-plus" class="text-5xl text-sidebar dark:text-slate-300" />
@@ -90,28 +90,25 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import { useStorage, useWindowSize, useScreenOrientation } from "@vueuse/core";
 
 import TheHeader from "./components/TheHeader.vue";
 import ColorPalette from "./components/ColorPalette.vue";
 
-const totalPalettes = ref(1);
-
-const palettes = useStorage("palette-names", [{ id: 1, name: "Palette 1", isBeingEdited: false }]);
-
-const openPalettes = useStorage("palettes-aperte", totalPalettes);
+const openPalettes = useStorage("palettes-aperte", 1);
 const selectedPalette = useStorage("palette-selezionata", 1);
 
+const palettes = useStorage("palette-names", [{ id: openPalettes.value, name: "Palette 1", isBeingEdited: false }]);
+
 const addPalette = () => {
-    totalPalettes.value++;
-    palettes.value.push({ id: totalPalettes.value, name: `Palette ${totalPalettes.value}`, isBeingEdited: false });
-    selectedPalette.value = totalPalettes.value;
+    openPalettes.value++;
+    palettes.value.push({ id: openPalettes.value, name: `Palette ${openPalettes.value}`, isBeingEdited: false });
+    selectedPalette.value = openPalettes.value;
 };
 
 const removePalette = palette => {
-    palettes.value.splice(palette, 1);
-    totalPalettes.value--;
+    openPalettes.value--;
+    palettes.value.splice(palette - 1, 1);
 };
 
 const showPalette = palette => {
