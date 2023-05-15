@@ -63,8 +63,8 @@
 
             <dialog
                 ref="confirmation"
-                class="w-1/2 select-none space-y-8 rounded border-4 border-blue-500 text-center shadow-2xl dark:border-slate-100 dark:bg-slate-700 dark:text-white p-8">
-                <div ref="target" class="relative space-y-8">
+                class="w-1/2 select-none space-y-8 rounded border-4 border-blue-500 text-center shadow-2xl dark:border-slate-100 dark:bg-slate-700 dark:text-white">
+                <div ref="target" class="relative space-y-8 p-8">
                     <div class="space-y-6 text-2xl">
                         <p>Performing this action will reset this palette's colors and generate random ones.</p>
                         <p>Are you sure you want to continue?</p>

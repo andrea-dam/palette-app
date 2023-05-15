@@ -1,12 +1,12 @@
 <template>
     <!-- Schermata Mobile -->
     <div
-        v-if="width <= 1024 && orientation === 'portrait-primary'"
+        v-if="(width <= 1024 && orientation === 'portrait-primary') || orientation === 'landscape-primary'"
         class="flex h-screen w-screen flex-col items-center justify-center space-y-5 bg-slate-900 p-10">
         <h1 class="text-5xl">Palette App</h1>
         <h2 class="text-2xl italic">by Andrea Damiani</h2>
         <Icon icon="material-symbols:mobile-off-rounded" class="text-9xl" />
-        <h2 class="text-center text-3xl">Quest'app è utilizzabile solo su uno schermo grande.</h2>
+        <h2 class="text-center text-3xl">This App may only be used on a large screen.</h2>
     </div>
 
     <!-- App Desktop -->
@@ -30,7 +30,8 @@
         </div>
 
         <!-- Barra Laterale -->
-        <aside class="z-10 col-span-2 flex flex-col items-center justify-between transition-colors duration-1000 bg-sidebar p-5 dark:bg-slate-700">
+        <aside
+            class="z-10 col-span-2 flex flex-col items-center justify-between bg-sidebar p-5 transition-colors duration-1000 dark:bg-slate-700">
             <div class="w-full space-y-2">
                 <!-- Pulsanti Palette -->
                 <div
