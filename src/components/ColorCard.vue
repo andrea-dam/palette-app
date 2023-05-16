@@ -87,11 +87,7 @@ const b1 = ref(null);
 
 const { copy, copied } = useClipboard();
 
-// const convertToRgb = useStorage("convert-to-rgb");
-
 const copia = () => {
-    console.log(useStorage("convert-to-rgb").value);
-
     if (hue.value >= 0 && hue.value < 60) {
         r1.value = c.value;
         g1.value = x.value;
@@ -122,10 +118,6 @@ const copia = () => {
     let g = Math.round((g1.value + m.value) * 255);
     let b = Math.round((b1.value + m.value) * 255);
 
-    if (useStorage("convert-to-rgb").value === true) {
-        copy(`rgb(${r}, ${g}, ${b})`);
-    } else {
-        copy(`hsl(${hue.value}, ${saturation.value}%, ${lightness.value}%)`);
-    }
+    copy(`rgb(${r}, ${g}, ${b})`);
 };
 </script>
