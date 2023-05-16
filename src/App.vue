@@ -17,8 +17,7 @@
             <TheHeader />
 
             <!-- Area Palette -->
-            <ColorPalette v-if="selectedPalette === 0" :selected-palette="0" />
-            <ColorPalette v-else-if="selectedPalette === 1" :selected-palette="1" />
+            <ColorPalette v-if="selectedPalette === 1" :selected-palette="1" />
             <ColorPalette v-else-if="selectedPalette === 2" :selected-palette="2" />
             <ColorPalette v-else-if="selectedPalette === 3" :selected-palette="3" />
             <ColorPalette v-else-if="selectedPalette === 4" :selected-palette="4" />
@@ -27,6 +26,7 @@
             <ColorPalette v-else-if="selectedPalette === 7" :selected-palette="7" />
             <ColorPalette v-else-if="selectedPalette === 8" :selected-palette="8" />
             <ColorPalette v-else-if="selectedPalette === 9" :selected-palette="9" />
+            <ColorPalette v-else-if="selectedPalette === 10" :selected-palette="10" />
         </div>
 
         <!-- Barra Laterale -->
@@ -94,20 +94,23 @@ import { useStorage, useWindowSize, useScreenOrientation } from "@vueuse/core";
 
 import TheHeader from "./components/TheHeader.vue";
 import ColorPalette from "./components/ColorPalette.vue";
-import { watch } from "vue";
 
-const selectedPalette = useStorage("palette-selezionata", 0);
+const selectedPalette = useStorage("palette-selezionata", 1);
 
-const palettes = useStorage("palette-names", [{ name: "Palette", isBeingEdited: false }]);
+const palettes = useStorage("palette-names", [{ name: "Palette 1", isBeingEdited: false }]);
 
 const addPalette = () => {
-    palettes.value.push({ name: `Palette ${palettes.value.length}`, isBeingEdited: false });
-    selectedPalette.value = palettes.value.length;
+    let counter = palettes.value.length;
+    counter++;
+    palettes.value.push({ name: `Palette ${counter}`, isBeingEdited: false });
+    selectedPalette.value = counter - 1;
 };
 
 const removePalette = index => {
+    let counter = palettes.value.length;
+    counter--;
     palettes.value.splice(index, 1);
-    selectedPalette.value = palettes.value.length;
+    selectedPalette.value = counter - 1;
 };
 
 const showPalette = palette => {
@@ -120,8 +123,6 @@ const updateName = palette => {
 
 const { width } = useWindowSize();
 const { orientation } = useScreenOrientation();
-
-watch(palettes, value => console.log(value))
 </script>
 
 <style>
