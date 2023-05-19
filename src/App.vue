@@ -1,7 +1,10 @@
 <template>
     <!-- Schermata Mobile -->
     <div
-        v-if="(width <= 1024 && orientation === 'portrait-primary') || (width <= 1024 && orientation === 'landscape-primary')"
+        v-if="
+            (width <= 1024 && orientation === 'portrait-primary') ||
+            (width <= 1024 && orientation === 'landscape-primary')
+        "
         class="flex h-screen w-screen flex-col items-center justify-center space-y-5 bg-slate-900 p-10">
         <h1 class="text-5xl">Palette App</h1>
         <h2 class="text-2xl italic">by Andrea Damiani</h2>
@@ -17,16 +20,16 @@
             <TheHeader />
 
             <!-- Area Palette -->
-            <ColorPalette v-if="selectedPalette === 1" :selected-palette="1" />
-            <ColorPalette v-else-if="selectedPalette === 2" :selected-palette="2" />
-            <ColorPalette v-else-if="selectedPalette === 3" :selected-palette="3" />
-            <ColorPalette v-else-if="selectedPalette === 4" :selected-palette="4" />
-            <ColorPalette v-else-if="selectedPalette === 5" :selected-palette="5" />
-            <ColorPalette v-else-if="selectedPalette === 6" :selected-palette="6" />
-            <ColorPalette v-else-if="selectedPalette === 7" :selected-palette="7" />
-            <ColorPalette v-else-if="selectedPalette === 8" :selected-palette="8" />
-            <ColorPalette v-else-if="selectedPalette === 9" :selected-palette="9" />
-            <ColorPalette v-else-if="selectedPalette === 10" :selected-palette="10" />
+            <ColorPalette v-if="selectedPalette === 0" :selected-palette="1" />
+            <ColorPalette v-else-if="selectedPalette === 1" :selected-palette="2" />
+            <ColorPalette v-else-if="selectedPalette === 2" :selected-palette="3" />
+            <ColorPalette v-else-if="selectedPalette === 3" :selected-palette="4" />
+            <ColorPalette v-else-if="selectedPalette === 4" :selected-palette="5" />
+            <ColorPalette v-else-if="selectedPalette === 5" :selected-palette="6" />
+            <ColorPalette v-else-if="selectedPalette === 6" :selected-palette="7" />
+            <ColorPalette v-else-if="selectedPalette === 7" :selected-palette="8" />
+            <ColorPalette v-else-if="selectedPalette === 8" :selected-palette="9" />
+            <ColorPalette v-else-if="selectedPalette === 9" :selected-palette="10" />
         </div>
 
         <!-- Barra Laterale -->
@@ -82,7 +85,10 @@
                 </button>
             </div>
 
-            <a href="https://andrea-dam.gitlab.io/tailwind-colors/" target="_blank" class="flex items-center gap-2 text-xl italic"
+            <a
+                href="https://andrea-dam.gitlab.io/tailwind-colors/"
+                target="_blank"
+                class="flex items-center gap-2 text-xl italic"
                 >Tailwind Colors<Icon icon="tabler:external-link"
             /></a>
         </aside>
@@ -115,6 +121,7 @@ const removePalette = index => {
 
 const showPalette = palette => {
     selectedPalette.value = palette;
+    console.log(palette, selectedPalette.value);
 };
 
 const updateName = palette => {
