@@ -1,10 +1,7 @@
 <template>
     <!-- Schermata Mobile -->
     <div
-        v-if="
-            (width <= 1024 && orientation === 'portrait-primary') ||
-            (width <= 1024 && orientation === 'landscape-primary')
-        "
+        v-if="(width <= 1024 && orientation === 'portrait-primary') || (width <= 1024 && orientation === 'landscape-primary')"
         class="flex h-screen w-screen flex-col items-center justify-center space-y-5 bg-slate-900 p-10">
         <h1 class="text-5xl">Palette App</h1>
         <h2 class="text-2xl italic">by Andrea Damiani</h2>
@@ -85,10 +82,7 @@
                 </button>
             </div>
 
-            <a
-                href="https://andrea-dam.gitlab.io/tailwind-colors/"
-                target="_blank"
-                class="flex items-center gap-2 text-xl italic"
+            <a href="https://andrea-dam.gitlab.io/tailwind-colors/" target="_blank" class="flex items-center gap-2 text-xl italic"
                 >Tailwind Colors<Icon icon="tabler:external-link"
             /></a>
         </aside>
@@ -134,6 +128,6 @@ const { orientation } = useScreenOrientation();
 
 <style>
 .active {
-    @apply bg-selected text-main-area dark:bg-slate-300 dark:text-slate-700;
+    @apply bg-selected text-main-area transition-colors duration-300 dark:bg-slate-300 dark:text-slate-700;
 }
 </style>

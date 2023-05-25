@@ -1,6 +1,6 @@
 <template>
     <!-- Area Card -->
-    <main class="row-span-10 bg-main-area pb-5 pt-6 duration-1000 dark:bg-slate-900">
+    <main class="row-span-10 bg-main-area pb-5 pt-6 transition-colors duration-300 dark:bg-slate-900">
         <CardContainer v-if="selectedPalette === 1">
             <ColorCard v-for="card in openCards" :key="card" :card-number="card" :selected-palette="1" />
         </CardContainer>
@@ -34,7 +34,7 @@
     </main>
 
     <!-- Barra Inferiore -->
-    <footer class="relative row-span-1 flex items-center justify-center bg-header-footer dark:bg-slate-800">
+    <footer class="relative row-span-1 flex items-center justify-center bg-header-footer transition-colors duration-300 dark:bg-slate-800">
         <!-- Pulsanti Modifica Carte -->
         <div class="grid grid-cols-2 items-center justify-center gap-2">
             <!-- Pulsante Meno -->
@@ -109,7 +109,7 @@ const changeCards = sign => {
 const css = useStyleTag();
 
 const checkConfirmation = () => {
-    dontAskAgain.value ? randomColors() : confirmation.value.showModal();
+    return dontAskAgain.value ? randomColors() : confirmation.value.showModal();
 };
 
 onClickOutside(target, () => confirmation.value.close());
