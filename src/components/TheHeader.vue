@@ -4,15 +4,10 @@
             <h1 class="text-2xl">Palette App</h1>
             <h2 class="text-end text-xs italic">by Andrea Damiani</h2>
         </div>
-        <DarkButton @click="toggleDark()" />
+        <DarkButton />
     </header>
 </template>
 
 <script setup>
-import { useDark, useToggle } from "@vueuse/core";
-
 import DarkButton from "./DarkButton.vue";
-
-const isDark = useDark();
-const toggleDark = useToggle(isDark);
 </script>

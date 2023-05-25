@@ -5,13 +5,15 @@
             type="checkbox"
             role="switch"
             :checked="isDark"
+            @input="toggleDark()"
             id="flexSwitchCheckDefault" />
         <Icon icon="ion:moon-sharp" inline="true" class="text-xl" />
     </div>
 </template>
 
 <script setup>
-import { useDark } from "@vueuse/core";
+import { useDark, useToggle } from "@vueuse/core";
 
 const isDark = useDark();
+const toggleDark = useToggle(isDark);
 </script>
