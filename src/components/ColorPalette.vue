@@ -36,7 +36,7 @@
     <!-- Barra Inferiore -->
     <footer class="relative row-span-1 flex items-center justify-center bg-header-footer transition-colors duration-300 dark:bg-slate-800">
         <!-- Pulsanti Modifica Carte -->
-        <div class="grid grid-cols-2 items-center justify-center gap-2">
+        <div class="grid grid-cols-2 text-xs items-center justify-center gap-2">
             <!-- Pulsante Meno -->
             <div class="flex items-center justify-center">
                 <SignButton v-show="openCards > 1" @click="changeCards('-')" icon="ic:round-minus" />
@@ -50,7 +50,7 @@
 
         <!-- Pulsante Random / Selettore HSL/RGB -->
         <div class="absolute right-6 flex items-center justify-center">
-            <button @click="checkConfirmation" class="text-3xl">
+            <button @click="checkConfirmation" class="text-2xl">
                 <Icon v-if="openCards === 1" icon="ph:dice-one-bold" />
                 <Icon v-else-if="openCards === 2" icon="ph:dice-two-bold" />
                 <Icon v-else-if="openCards === 3" icon="ph:dice-three-bold" />

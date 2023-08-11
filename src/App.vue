@@ -1,12 +1,10 @@
 <template>
     <!-- Schermata Mobile -->
-    <div
-        v-if="(width <= 1024 && orientation === 'portrait-primary') || (width <= 1024 && orientation === 'landscape-primary')"
-        class="flex h-screen w-screen flex-col items-center justify-center space-y-5 bg-slate-900 p-10">
-        <h1 class="text-5xl">Palette App</h1>
+    <div v-if="onMobile" class="flex h-[100dvh] w-screen flex-col items-center justify-center gap-5 bg-slate-900 p-5 text-slate-50">
+        <h1 class="text-center text-5xl">Palette App</h1>
         <h2 class="text-2xl italic">by Andrea Damiani</h2>
-        <Icon icon="material-symbols:mobile-off-rounded" class="text-9xl" />
-        <h2 class="text-center text-3xl">This App may only be used on a large screen.</h2>
+        <Icon :icon="smartphoneOff" class="text-9xl" />
+        <h2 class="text-center text-3xl">This App is only available on large screens.</h2>
     </div>
 
     <!-- App Desktop -->
@@ -14,7 +12,7 @@
         <!-- Schermata Principale -->
         <div class="col-span-10 grid grid-rows-12">
             <!-- Barra Titolo -->
-            <TheHeader />
+            <TheHeader class="row-span-1" />
 
             <!-- Area Palette -->
             <ColorPalette v-if="selectedPalette === 0" :selected-palette="1" />
@@ -31,7 +29,7 @@
 
         <!-- Barra Laterale -->
         <aside
-            class="z-10 col-span-2 flex flex-col items-center justify-between bg-sidebar p-5 transition-colors duration-1000 dark:bg-slate-700">
+            class="z-10 col-span-2 h-full flex flex-col items-center justify-between bg-sidebar p-5 transition-colors duration-1000 dark:bg-slate-700">
             <div class="w-full space-y-2">
                 <!-- Pulsanti Palette -->
                 <div
@@ -90,7 +88,7 @@
 </template>
 
 <script setup>
-import { useStorage, useWindowSize, useScreenOrientation } from "@vueuse/core";
+import { useStorage, breakpointsTailwind, useBreakpoints } from "@vueuse/core";
 
 import TheHeader from "./components/TheHeader.vue";
 import ColorPalette from "./components/ColorPalette.vue";
@@ -122,8 +120,8 @@ const updateName = palette => {
     palettes.value[palette].isBeingEdited = true;
 };
 
-const { width } = useWindowSize();
-const { orientation } = useScreenOrientation();
+const breakpoints = useBreakpoints(breakpointsTailwind);
+const onMobile = breakpoints.smaller("xl");
 </script>
 
 <style>
